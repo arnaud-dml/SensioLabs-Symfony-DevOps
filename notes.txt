@@ -1,0 +1,41 @@
+Lister les dépendances directes
+> composer info -D
+
+Flex
+> https://flex.symfony.com/
+> Extension pour composer, permettant d'ajouter et/ou de modifier certaines commandes
+  Ex: composer req <package> (le package va être récupéré sur https://flex.symfony.com/)
+
+Contrôle
+> composer req requirements-checker --dev
+> Open "http://127.0.0.1:8000/check.php"
+> composer rem requirements-checker --dev
+
+Termes techniques
+> CI = Continue Integration
+> PR = Pull Request
+
+PHP CODE SNIFFER
+> composer req squizlabs/php_codesniffer --dev
+> vendor/bin/phpcs --standard=PSR1 src
+> vendor/bin/phpcs --standard=PSR2 src
+> vendor/bin/phpcs --standard=PSR12 src
+
+PHP MD
+> composer req phpmd/phpmd --dev
+> ...
+
+Test
+> composer req test-pack --dev
+
+    ClassnameTest.php
+    > class ClassnameTest extends TestCase {} // Test Unitaire
+    > class ClassnameTest extends WebTestCase {} // Test Fonctionnelle
+    > class ClassnameTest extends PantherTestCase {} // Test Fonctionnelle
+
+    // Créer un test
+    make:functional-test // Test Fonctionnelle
+    make:unit-test // Test Unitaire
+
+    ./bin/phpunit // Lancer les tests
+    PANTHER_NO_HEADLESS=1 ./bin/phpunit // Lancer les tests, avec visualisation
