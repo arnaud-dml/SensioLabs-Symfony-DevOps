@@ -1,0 +1,44 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+scale 600 height
+hide circle
+skinparam linetype polyline
+skinparam defaultClassScale 200 height
+
+class Wheater {
+    Datetime date
+    String location
+    Float temperature
+    Float hydrometry
+}
+
+class Pot {
+    String location
+    Plant plant
+    Gardener gardener
+}
+
+Pot "1,n" <--> "0,1" Plant
+Pot "1,n" <--> "0,1" Gardener
+
+class Plant {
+    String name
+    Recipe recipe
+}
+
+class Gardener {
+    String name
+    String email
+}
+
+Plant "1,n" <--> "1,1" Recipe
+Gardener "1,1" <--> "0,n" Recipe
+
+class Recipe {
+    Float optimalTemperature
+    Float optimalHydrometry
+}
+
+@enduml

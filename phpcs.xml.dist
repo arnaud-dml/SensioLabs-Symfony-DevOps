@@ -16,4 +16,8 @@
     <file>src/</file>
     <file>tests/</file>
 
+    <rule ref="Standard.Cat.SniffName.ErrorCode">
+        <exclude-pattern>/src/Kernel.php</exclude-pattern>
+    </rule>
+
 </ruleset>

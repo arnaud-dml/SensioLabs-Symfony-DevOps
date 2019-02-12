@@ -6,7 +6,7 @@ Flex
 > Extension pour composer, permettant d'ajouter et/ou de modifier certaines commandes
   Ex: composer req <package> (le package va être récupéré sur https://flex.symfony.com/)
 
-Contrôle
+Contrôle des dépendances
 > composer req requirements-checker --dev
 > Open "http://127.0.0.1:8000/check.php"
 > composer rem requirements-checker --dev
@@ -15,27 +15,72 @@ Termes techniques
 > CI = Continue Integration
 > PR = Pull Request
 
-PHP CODE SNIFFER
-> composer req squizlabs/php_codesniffer --dev
-> vendor/bin/phpcs --standard=PSR1 src
-> vendor/bin/phpcs --standard=PSR2 src
-> vendor/bin/phpcs --standard=PSR12 src
+http://www.acseo.fr/utiliser-phpmd-phpcs-php-cs-fixer-pour-vos-projets-php/
 
-PHP MD
-> composer req phpmd/phpmd --dev
-> ...
-
-Test
+PHP UNIT (Bridge)
+https://flex.symfony.com/ -> Search "test"
+https://packagist.org/packages/symfony/test-pack
 > composer req test-pack --dev
 
     ClassnameTest.php
     > class ClassnameTest extends TestCase {} // Test Unitaire
     > class ClassnameTest extends WebTestCase {} // Test Fonctionnelle
     > class ClassnameTest extends PantherTestCase {} // Test Fonctionnelle
+    Chaque méthode commence par "test"
+    > funtion testName(){}
 
     // Créer un test
-    make:functional-test // Test Fonctionnelle
-    make:unit-test // Test Unitaire
+    make:functional-test  // Fonctionnelle
+    make:unit-test        // Unitaire
 
-    ./bin/phpunit // Lancer les tests
-    PANTHER_NO_HEADLESS=1 ./bin/phpunit // Lancer les tests, avec visualisation
+    // Lancer les tests
+    > php bin/phpunit
+    > ./bin/phpunit
+
+    // Lancer les tests, avec visualisation
+    > PANTHER_NO_HEADLESS=1 ./bin/phpunit 
+
+    // Autres commandes
+    > php bin/phpunit --testdox                                             // Rapport dans la console
+    > php bin/phpunit --testdox-html=./var/log/phpunit/testdox.html         // Génère un rapport (/var/log/phpunit/testdox.html)
+    > php bin/phpunit --coverage-html=./var/log/phpunit/coverage            // Génère un rapport (/var/log/phpunit/coverage/index.html)
+    > phpdbg -qrr ./bin/phpunit --coverage-html=./var/log/phpunit/coverage  // IDEM, mais avec PHPDBG au lieu de Xdebug (à partir de PHP5.6)
+
+    Exclure un fichier des tests
+    /phpunit.xml.dist
+    ...
+    <filter>
+        <whitelist>
+            ...
+            <exclude>
+                <directory>./src/Kernel.php</directory> // Exlusion du fichier "/src/Kernel.php"
+            </exclude>
+        </whitelist>
+    </filter>
+
+PHP CS "Code Sniffer" (https://github.com/squizlabs/PHP_CodeSniffer)
+> composer req squizlabs/php_codesniffer --dev
+> php vendor/bin/phpcs --standard=PSR1 src
+> php vendor/bin/phpcs --standard=PSR2 src
+> php vendor/bin/phpcs --standard=PSR12 src --ignore=/src/Kernel.php
+
+PHP METRICS (https://www.phpmetrics.org/)
+> composer require phpmetrics/phpmetrics --dev
+> php vendor/bin/phpmetrics --report-html=./var/log/phpmetrix/ ./src/
+
+PHP MD "Mess Detector" (https://phpmd.org/ + http://www.acseo.fr/utiliser-phpmd-phpcs-php-cs-fixer-pour-vos-projets-php/)
+> composer req phpmd/phpmd --dev
+> php vendor/bin/phpmd src html ./phpmd.xml.dist > ./var/log/phpmd.html
+
+?? PHP PDEPEND (https://pdepend.org/)
+?? PHP CPD "Copy/Paste Detector" (https://phpqa.io/projects/phpcpd.html)
+
+Tester si Xdebug est installé
+> php --ri xdebug 
+
+Makefile (https://www.grafikart.fr/tutoriels/makefile-953)
+> make tests
+> make --debug=b tests // Affiche les actions pour le débuggage
+
+TDD
+> Test Driven Development = on commence par développer les tests !
