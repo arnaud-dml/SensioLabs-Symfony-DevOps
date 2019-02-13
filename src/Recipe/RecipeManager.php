@@ -8,7 +8,7 @@ use App\Entity\Recipe;
 
 class RecipeManager
 {
-    /** 
+    /**
      * @var ObjectManager
      */
     protected $entityManager;

@@ -8,7 +8,7 @@ use App\Entity\Plant;
 
 class PlantManager
 {
-    /** 
+    /**
      * @var ObjectManager
      */
     protected $entityManager;

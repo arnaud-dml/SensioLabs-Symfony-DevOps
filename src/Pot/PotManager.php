@@ -8,7 +8,7 @@ use App\Entity\Pot;
 
 class PotManager
 {
-    /** 
+    /**
      * @var ObjectManager
      */
     protected $entityManager;

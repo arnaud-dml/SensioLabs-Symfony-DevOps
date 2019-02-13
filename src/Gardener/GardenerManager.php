@@ -8,7 +8,7 @@ use App\Entity\Gardener;
 
 class GardenerManager
 {
-    /** 
+    /**
      * @var ObjectManager
      */
     protected $entityManager;
