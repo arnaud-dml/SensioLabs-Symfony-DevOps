@@ -88,7 +88,7 @@ class Plant
     {
         if (!$this->recipes->contains($recipe)) {
             $this->recipes[] = $recipe;
-            $recipe->setGardener($this);
+            $recipe->setPlant($this);
         }
 
         return $this;
