@@ -8,38 +8,35 @@ skinparam linetype polyline
 skinparam defaultClassScale 200 height
 
 class Wheater {
-    Datetime date
-    String location
-    Float temperature
-    Float hydrometry
+    date: Datetime
+    location: string
+    temperature: float
+    hydrometry: float
 }
 
 class Pot {
-    String location
-    Plant plant
-    Gardener gardener
+    location: string
 }
 
-Pot "0,n" <-- "1,1" Plant
-Pot "0,n" <-- "1,1" Gardener
+Pot "*" x-> "1" PlantType
+Pot "*" <--x "1" Gardener
 
-class Plant {
-    String name
-    Recipe recipe
+class PlantType {
+    name: string
+    date: Datetime
 }
 
 class Gardener {
-    String name
-    String email
+    name: string
+    email: string
 }
 
-Plant "1,n" <-- "1,1" Recipe
-Gardener "1,1" --> "0,n" Recipe
+PlantType "1" x-> "*" Recipe
+Gardener "1" x--> "*" Recipe
 
 class Recipe {
-    Float optimalTemperature
-    Float optimalHydrometry
-    Gardener gardener
+    optimalTemperature: float
+    optimalHydrometry: float
 }
 
 @enduml
