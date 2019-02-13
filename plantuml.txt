@@ -18,12 +18,16 @@ class Pot {
     location: string
 }
 
-Pot "*" x-> "1" PlantType
+Pot "*" x-> "1" Plant
+Plant "*" --o "1" PlantType
 Pot "*" <--x "1" Gardener
+
+class Plant {
+    date: Datetime
+}
 
 class PlantType {
     name: string
-    date: Datetime
 }
 
 class Gardener {
@@ -31,7 +35,7 @@ class Gardener {
     email: string
 }
 
-PlantType "1" x-> "*" Recipe
+Plant "1" x-> "*" Recipe
 Gardener "1" x--> "*" Recipe
 
 class Recipe {
