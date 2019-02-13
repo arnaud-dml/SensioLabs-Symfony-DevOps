@@ -26,3 +26,7 @@
 plantuml.jar
 plantuml.pdf
 ###< plantuml ###
+
+###> notes ###
+notes.txt
+###< notes ###
