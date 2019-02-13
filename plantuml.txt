@@ -7,7 +7,7 @@ hide circle
 skinparam linetype polyline
 skinparam defaultClassScale 200 height
 
-class Wheater {
+class Weather {
     date: Datetime
     location: string
     temperature: float
@@ -31,7 +31,7 @@ class PlantType {
 }
 
 class Gardener {
-    name: string
+    username: string
     email: string
 }
 
