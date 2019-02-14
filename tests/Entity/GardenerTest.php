@@ -56,21 +56,25 @@ class GardenerTest extends TestCase
         $this->gardener->addPot($pot);
         self::assertCount(1, $this->gardener->getPots());
 
+        $pot->method('getGardener')->willReturn($this->gardener);
+
         $this->gardener->removePot($pot);
         self::assertCount(0, $this->gardener->getPots());
     }
 
     public function testHasRecipes()
     {
-        $this->recipe = $this->createMock(Recipe::class);
+        $recipe = $this->createMock(Recipe::class);
 
-        $this->gardener->addRecipe($this->recipe);
+        $this->gardener->addRecipe($recipe);
         self::assertCount(1, $this->gardener->getRecipes());
 
-        $this->gardener->addRecipe($this->recipe);
+        $this->gardener->addRecipe($recipe);
         self::assertCount(1, $this->gardener->getRecipes());
 
-        $this->gardener->removeRecipe($this->recipe);
+        $recipe->method('getGardener')->willReturn($this->gardener);
+
+        $this->gardener->removeRecipe($recipe);
         self::assertCount(0, $this->gardener->getRecipes());
     }
 }

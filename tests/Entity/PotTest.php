@@ -54,6 +54,8 @@ class PotTest extends TestCase
         $this->pot->addPlant($plant);
         self::assertCount(1, $this->pot->getPlants());
 
+        $plant->method('getPot')->willReturn($this->pot);
+
         $this->pot->removePlant($plant);
         self::assertCount(0, $this->pot->getPlants());
     }

@@ -62,6 +62,8 @@ class PlantTest extends TestCase
         $this->plant->addRecipe($recipe);
         self::assertCount(1, $this->plant->getRecipes());
 
+        $recipe->method('getPlant')->willReturn($this->plant);
+
         $this->plant->removeRecipe($recipe);
         self::assertCount(0, $this->plant->getRecipes());
     }
