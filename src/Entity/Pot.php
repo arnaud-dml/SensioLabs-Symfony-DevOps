@@ -22,12 +22,12 @@ class Pot
      * @ORM\Column(type="string", length=255)
      */
     private $location;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Gardener", inversedBy="pots")
      */
     private $gardener;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Plant", cascade={"persist", "remove"}, mappedBy="pot")
      */
@@ -66,7 +66,7 @@ class Pot
 
         return $this;
     }
-    
+
     public function addPlant(Plant $plant): self
     {
         if (!$this->plants->contains($plant)) {

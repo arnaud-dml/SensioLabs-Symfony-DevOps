@@ -27,12 +27,12 @@ class Gardener
      * @ORM\Column(type="string", length=255)
      */
     private $email;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Pot", cascade={"persist", "remove"}, mappedBy="gardener")
      */
     private $pots;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Recipe", cascade={"persist", "remove"}, mappedBy="gardener")
      */
@@ -72,7 +72,7 @@ class Gardener
 
         return $this;
     }
-    
+
     public function addPot(Pot $pot): self
     {
         if (!$this->pots->contains($pot)) {
@@ -102,7 +102,7 @@ class Gardener
     {
         return $this->pots;
     }
-    
+
     public function addRecipe(Recipe $recipe): self
     {
         if (!$this->recipes->contains($recipe)) {

@@ -18,6 +18,9 @@ phpcs: vendor
 	php vendor/bin/phpcs --standard=PSR2 src
 	php vendor/bin/phpcs --standard=PSR12 src --ignore=/src/Kernel.php
 
+phpcsfixer: vendor phpcs
+	vendor/bin/php-cs-fixer fix --using-cache=no --verbose --diff
+
 # Tâche : "phpmd"
 # Dépendances : si le dossier "vendor" existe et est plus vieux, sinon, execute la tâche du même nom
 phpmd: vendor

@@ -2,9 +2,9 @@
 
 namespace App\Recipe;
 
+use App\Entity\Recipe;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use App\Entity\Recipe;
 
 class RecipeManager
 {
@@ -12,7 +12,6 @@ class RecipeManager
      * @var ObjectManager
      */
     protected $entityManager;
-
 
     /**
      * @param ObjectManager $entityManager
@@ -24,6 +23,7 @@ class RecipeManager
 
     /**
      * @param array $data
+     *
      * @return Recipe
      */
     public function createFromArray(array $data): Recipe
@@ -36,6 +36,7 @@ class RecipeManager
         $recipe->setOptimalHydrometry($data['optimalHydrometry']);
         $this->entityManager->persist($recipe);
         $this->entityManager->flush();
+
         return $recipe;
     }
 }

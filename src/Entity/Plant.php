@@ -22,17 +22,17 @@ class Plant
      * @ORM\Column(type="datetime")
      */
     private $date;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PlantType", inversedBy="plants")
      */
     private $plantType;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Pot", inversedBy="plants")
      */
     private $pot;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Recipe", cascade={"persist", "remove"}, mappedBy="plant")
      */
@@ -83,7 +83,7 @@ class Plant
 
         return $this;
     }
-    
+
     public function addRecipe(Recipe $recipe): self
     {
         if (!$this->recipes->contains($recipe)) {

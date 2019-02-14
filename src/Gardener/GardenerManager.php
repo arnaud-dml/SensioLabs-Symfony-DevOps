@@ -2,9 +2,9 @@
 
 namespace App\Gardener;
 
+use App\Entity\Gardener;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use App\Entity\Gardener;
 
 class GardenerManager
 {
@@ -12,7 +12,6 @@ class GardenerManager
      * @var ObjectManager
      */
     protected $entityManager;
-
 
     /**
      * @param ObjectManager $entityManager
@@ -24,6 +23,7 @@ class GardenerManager
 
     /**
      * @param array $data
+     *
      * @return Gardener
      */
     public function createFromArray(array $data): Gardener
@@ -36,6 +36,7 @@ class GardenerManager
         $gardener->setEmail($data['email']);
         $this->entityManager->persist($gardener);
         $this->entityManager->flush();
+
         return $gardener;
     }
 }

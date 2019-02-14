@@ -25,12 +25,12 @@ class Recipe
      * @ORM\Column(type="decimal", precision=5, scale=2)
      */
     private $optimalHydrometry;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Gardener", inversedBy="recipes")
      */
     private $gardener;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Plant", inversedBy="recipes")
      */

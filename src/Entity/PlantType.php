@@ -22,7 +22,7 @@ class PlantType
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Plant", cascade={"persist", "remove"}, mappedBy="plantType")
      */
@@ -49,7 +49,7 @@ class PlantType
 
         return $this;
     }
-    
+
     public function addPlant(Plant $plant): self
     {
         if (!$this->plants->contains($plant)) {

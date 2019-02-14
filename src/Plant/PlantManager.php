@@ -2,9 +2,9 @@
 
 namespace App\Plant;
 
+use App\Entity\Plant;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use App\Entity\Plant;
 
 class PlantManager
 {
@@ -12,7 +12,6 @@ class PlantManager
      * @var ObjectManager
      */
     protected $entityManager;
-
 
     /**
      * @param ObjectManager $entityManager
@@ -24,6 +23,7 @@ class PlantManager
 
     /**
      * @param array $data
+     *
      * @return Plant
      */
     public function createFromArray(array $data): Plant
@@ -35,6 +35,7 @@ class PlantManager
         $plant->setDate($data['date']);
         $this->entityManager->persist($plant);
         $this->entityManager->flush();
+
         return $plant;
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Pot;
 
+use App\Entity\Pot;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use App\Entity\Pot;
 
 class PotManager
 {
@@ -12,7 +12,6 @@ class PotManager
      * @var ObjectManager
      */
     protected $entityManager;
-
 
     /**
      * @param ObjectManager $entityManager
@@ -24,6 +23,7 @@ class PotManager
 
     /**
      * @param array $data
+     *
      * @return Pot
      */
     public function createFromArray(array $data): Pot
@@ -35,6 +35,7 @@ class PotManager
         $pot->setLocation($data['location']);
         $this->entityManager->persist($pot);
         $this->entityManager->flush();
+
         return $pot;
     }
 }
