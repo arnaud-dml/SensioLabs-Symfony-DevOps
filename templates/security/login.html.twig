@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Login{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col py-5">
+
+            <h1>Login</h1>
+            {% if form is rootform %}{{ form_start(form) }}{{ form_row(form._token) }}{{ form_errors(form) }}{% endif %}
+            <div class="form-group">
+                {{ form_label(form._username, 'Username') }}
+                {{ form_widget(form._username, {'attr': {'class': 'form-control-sm'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form._password, 'Password') }}
+                {{ form_widget(form._password, {'attr': {'class': 'form-control-sm'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(form._remember_me, {'label': 'Remember me ?'}) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.ok, {'label': 'Submit', 'attr': {'class': 'btn-sm btn-success'}}) }}
+            </div>
+            {% if form is rootform %}{{ form_end(form, {'render_rest': false}) }}{% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

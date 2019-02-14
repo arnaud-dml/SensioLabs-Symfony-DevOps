@@ -1,0 +1,32 @@
+security:
+    encoders:
+        App\Entity\Gardener:
+            algorithm: bcrypt
+
+    providers:
+        main:
+            entity:
+                class: App\Entity\Gardener
+                property: username
+        
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            http_basic: ~
+            provider: main
+            pattern: ^/
+            form_login:
+                login_path: login
+                check_path: login
+                default_target_path: homepage
+                always_use_default_target_path: true
+            logout:
+                path: logout
+                target: login
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }

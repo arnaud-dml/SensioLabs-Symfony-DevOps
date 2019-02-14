@@ -13,26 +13,18 @@ class RecipeRepositoryTest extends KernelTestCase
     protected function setUp()
     {
         $kernel = self::bootKernel();
-
-        $this->entityManager = $kernel->getContainer()
-            ->get('doctrine')
-            ->getManager();
+        $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
     }
 
     public function testEmptyFindAll()
     {
-        $gardener = $this->entityManager
-            ->getRepository(Recipe::class)
-            ->findAll()
-        ;
-
-        $this->assertCount(0, $gardener);
+        $recipe = $this->entityManager->getRepository(Recipe::class)->findAll();
+        self::assertInternalType('array', $recipe);
     }
 
     protected function tearDown()
     {
         parent::tearDown();
-
         $this->entityManager->close();
         $this->entityManager = null;
     }

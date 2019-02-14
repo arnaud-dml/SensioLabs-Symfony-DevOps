@@ -13,26 +13,18 @@ class GardenerRepositoryTest extends KernelTestCase
     protected function setUp()
     {
         $kernel = self::bootKernel();
-
-        $this->entityManager = $kernel->getContainer()
-            ->get('doctrine')
-            ->getManager();
+        $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
     }
 
     public function testEmptyFindAll()
     {
-        $gardener = $this->entityManager
-            ->getRepository(Gardener::class)
-            ->findAll()
-        ;
-
-        $this->assertCount(0, $gardener);
+        $gardener = $this->entityManager->getRepository(Gardener::class)->findAll();
+        self::assertInternalType('array', $gardener);
     }
 
     protected function tearDown()
     {
         parent::tearDown();
-
         $this->entityManager->close();
         $this->entityManager = null;
     }

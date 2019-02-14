@@ -31,6 +31,9 @@ phpmd: vendor
 phpunit: vendor
 	php bin/phpunit --coverage-html=./var/log/phpunit/coverage
 
+panther: vendor
+	PANTHER_NO_HEADLESS=1 ./bin/phpunit
+
 # Tâche : "phpmetrics"
 # Dépendances : si le dossier "vendor" existe et est plus vieux, sinon, execute la tâche du même nom
 phpmetrics: vendor
