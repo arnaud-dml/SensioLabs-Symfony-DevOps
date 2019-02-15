@@ -9,6 +9,11 @@ use App\Entity\Gardener;
 
 class GardenerFixtures extends Fixture
 {
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    public $passwordEncoder;
+
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
@@ -16,7 +21,7 @@ class GardenerFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $gardener = new Gardener;
+        $gardener = new Gardener();
         $gardener->setUsername('johndoe');
         $gardener->setEmail('johndoe@gmail.com');
         $gardener->setPassword($this->passwordEncoder->encodePassword($gardener, 'johndoe'));

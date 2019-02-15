@@ -92,12 +92,12 @@ class Gardener implements UserInterface, \Serializable
         return $this;
     }
 
-    function getPlainPassword(): ?string
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
 
-    function setPlainPassword(string $plainPassword): self
+    public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
 
@@ -109,7 +109,7 @@ class Gardener implements UserInterface, \Serializable
         return $this->password;
     }
 
-    function setPassword(string $password): self
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
@@ -132,20 +132,20 @@ class Gardener implements UserInterface, \Serializable
         return $this;
     }
 
-    function addRole(string $role): self
+    public function addRole(string $role): self
     {
         $this->roles[] = $role;
 
         return $this;
     }
 
-    function removeRole(string $role): self
+    public function removeRole(string $role): self
     {
         $roles = $this->getRoles();
         if (($key = array_search($role, $roles)) !== false) {
             unset($roles[$key]);
         }
-        $this->setRoles($roles);
+        $this->setRoles(array_values($roles));
 
         return $this;
     }
@@ -217,10 +217,9 @@ class Gardener implements UserInterface, \Serializable
 
     public function eraseCredentials()
     {
-       
     }
 
-    /** 
+    /**
      * @see \Serializable::serialize()
      */
     public function serialize(): string
@@ -233,7 +232,7 @@ class Gardener implements UserInterface, \Serializable
         ]);
     }
 
-    /** 
+    /**
      * @see \Serializable::unserialize()
      */
     public function unserialize($serialized): self

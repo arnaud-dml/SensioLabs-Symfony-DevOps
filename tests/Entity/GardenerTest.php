@@ -41,9 +41,54 @@ class GardenerTest extends TestCase
 
     public function testHasEmail()
     {
-        $email = 'John Doe';
+        $email = 'john-doe@gmail.com';
         $this->gardener->setEmail($email);
         self::assertEquals($email, $this->gardener->getEmail());
+    }
+
+    public function testHasPlainPassword()
+    {
+        $plainPassword = 'Ghk2t73&L_Xa@Vf9';
+        $this->gardener->setPlainPassword($plainPassword);
+        self::assertEquals($plainPassword, $this->gardener->getPlainPassword());
+    }
+
+    public function testHasPassword()
+    {
+        $password = 'Ghk2t73&L_Xa@Vf9';
+        $this->gardener->setPassword($password);
+        self::assertEquals($password, $this->gardener->getPassword());
+    }
+
+    public function testHasRoles()
+    {
+        $roles = ['ROLE_ADMIN'];
+        $this->gardener->setRoles($roles);
+        self::assertEquals($roles, $this->gardener->getRoles());
+    }
+
+    public function testHasAddRole()
+    {
+        $roleDefault = 'ROLE_USER';
+        $role = 'ROLE_ADMIN';
+        self::assertEquals([$roleDefault], $this->gardener->getRoles());
+        $this->gardener->addRole($role);
+        self::assertEquals([$roleDefault, $role], $this->gardener->getRoles());
+    }
+
+    public function testHasRemoveRole()
+    {
+        $roleDefault = 'ROLE_USER';
+        $role = 'ROLE_ADMIN';
+        $this->gardener->addRole($role);
+        $this->gardener->removeRole($role);
+        self::assertEquals([$roleDefault], $this->gardener->getRoles());
+    }
+
+    public function testHasSerialize()
+    {
+        $serialize = $this->gardener->serialize();
+        self::assertEquals($this->gardener, $this->gardener->unserialize($serialize));
     }
 
     public function testHasPots()
