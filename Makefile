@@ -18,10 +18,35 @@ install: ## composer install/update
 install: vendor
 .PHONY: install
 
-server: ## run server localhost:8080
+server: ## run server
 server: install
-	$(SYMFONY) server:run localhost:8080
+	$(SYMFONY) server:run
 .PHONY: server
+
+## 
+## Cache
+## -----
+## 
+
+ccd: ## clear cache DEV
+ccd: install
+	$(SYMFONY) cache:clear --env=dev
+.PHONY: ccd
+
+ccp: ## clear cache PROD
+ccp: install
+	$(SYMFONY) cache:clear --env=prod
+.PHONY: ccp
+
+cct: ## clear cache TEST
+cct: install
+	$(SYMFONY) cache:clear --env=test
+.PHONY: cct
+
+cc: ## clear cache
+cc: install
+	$(SYMFONY) cache:clear
+.PHONY: cc
 
 ## 
 ## Doctrine
