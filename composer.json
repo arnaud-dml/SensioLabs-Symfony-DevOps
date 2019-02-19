@@ -70,8 +70,11 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "friendsofphp/php-cs-fixer": "^2.14",
+        "jawira/plantuml": "^1.15",
         "phpmd/phpmd": "^2.6",
         "phpmetrics/phpmetrics": "^2.4",
+        "sebastian/phpcpd": "^4.1",
+        "sebastian/phpdcd": "^1.0",
         "sensiolabs/security-checker": "^5.0",
         "squizlabs/php_codesniffer": "^3.4",
         "symfony/maker-bundle": "dev-master",
