@@ -24,6 +24,55 @@ server: install
 .PHONY: server
 
 ## 
+## Doctrine
+## --------
+## 
+
+ddd: ## drop database
+ddd:
+	$(SYMFONY) doctrine:database:drop --force --if-exists
+.PHONY: ddd
+
+ddc: ## create database, if not exists
+ddc:
+	$(SYMFONY) doctrine:database:create --if-not-exists
+.PHONY: ddc
+
+dsc: ## create schema 
+dsc:
+	$(SYMFONY) doctrine:schema:create
+.PHONY: dsc
+
+dsv: ## validate schema 
+dsv:
+	$(SYMFONY) doctrine:schema:validate
+.PHONY: dsv
+
+dsup: ## update schema preview
+dsup:
+	$(SYMFONY) doctrine:schema:update --dump-sql
+.PHONY: dsup
+
+dsu: ## update schema 
+dsu:
+	$(SYMFONY) doctrine:schema:update --force
+.PHONY: dsu
+
+dmm: ## migrate migration's file
+dmm:
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction
+.PHONY: dmm
+
+dfl: ## load fixtures
+dfl:
+	$(SYMFONY) doctrine:fixtures:load --append
+.PHONY: dfl
+
+db: ## Create database and load fixtures
+db: ddd ddc dsu dfl
+.PHONY: db
+
+## 
 ## Tests
 ## -----
 ## 
@@ -60,11 +109,13 @@ phpcpd: ## PHP Copy/Paste Detector
 phpcpd: install
 	mkdir -p $(LOG)/phpcpd/
 	$(VENDOR)/phpcpd src > $(LOG)/phpcpd/report.txt
+.PHONY: phpcpd
 
 phpdcd: ## PHP Dead Code Detector
 phpdcd: install	
 	mkdir -p $(LOG)/phpdcd/
 	$(VENDOR)/phpdcd src > $(LOG)/phpdcd/report.txt
+.PHONY: phpdcd
 
 phpunit: ## run PHPUnit
 phpunit: install
