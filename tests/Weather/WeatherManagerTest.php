@@ -2,17 +2,21 @@
 
 namespace App\Tests\Weather;
 
+use App\Entity\Weather;
+use App\Weather\WeatherManager;
+use App\Weather\WeatherService;
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use App\Weather\WeatherManager;
-use App\Entity\Weather;
 
 class WeatherManagerTest extends TestCase
 {
     /** @var MockObject|ObjectManager */
     private $entityManager;
+
+    /** @var MockObject|WeatherService */
+    private $weatherService;
 
     /** @var WeatherManager */
     private $manager;
@@ -20,36 +24,11 @@ class WeatherManagerTest extends TestCase
     protected function setUp()
     {
         $this->entityManager = $this->createMock(ObjectManager::class);
-        $this->manager = new WeatherManager($this->entityManager);
+        $this->weatherService = $this->createMock(WeatherService::class);
+        $this->manager = new WeatherManager($this->entityManager, $this->weatherService);
     }
 
-    // public function testCreate()
-    // {
-    //     $this->entityManager
-    //         ->expects(self::once())
-    //         ->method('persist');
-
-    //     $this->entityManager
-    //         ->expects(self::once())
-    //         ->method('flush');
-
-    //     $weather = $this->manager->createFromArray([
-    //         'location' => '48.8568,2.3508',
-    //         'temperature' => 23,
-    //         'humidity' => 14,
-    //         'date' => new \DateTime()
-    //     ]);
-
-    //     self::assertInstanceOf(Weather::class, $weather);
-    // }
-
-    public function testCreateWithEmptyData()
-    {
-        $this->expectException(MissingOptionsException::class);
-        $this->manager->createFromArray([]);
-    }
-
-    public function testCreateFromAPI()
+    public function testCreate()
     {
         $this->entityManager
             ->expects(self::once())
@@ -59,7 +38,17 @@ class WeatherManagerTest extends TestCase
             ->expects(self::once())
             ->method('flush');
 
-        $weather = $this->manager->createFromAPI();
+        $this->weatherService
+            ->expects(self::once())
+            ->method('getData')
+            ->willReturn([
+                'location' => '48.8568,2.3508',
+                'temperature' => 23.6,
+                'humidity' => 14.8,
+                'date' => new \DateTime()
+            ]);
+
+        $weather = $this->manager->create();
         self::assertInstanceOf(Weather::class, $weather);
     }
 }

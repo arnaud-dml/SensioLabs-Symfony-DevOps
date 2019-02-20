@@ -136,12 +136,6 @@ phpcpd: install
 	$(VENDOR)/phpcpd src > $(LOG)/phpcpd/report.txt
 .PHONY: phpcpd
 
-phpdcd: ## PHP Dead Code Detector
-phpdcd: install	
-	mkdir -p $(LOG)/phpdcd/
-	$(VENDOR)/phpdcd src > $(LOG)/phpdcd/report.txt
-.PHONY: phpdcd
-
 phpunit: ## run PHPUnit
 phpunit: install
 	$(PHPUNIT)
