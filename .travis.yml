@@ -1,5 +1,9 @@
 language: php
 
+branches:
+  only:
+    - master
+
 php: 
   - '7.3'
 
@@ -28,4 +32,4 @@ script:
   - bin/console doctrine:schema:create
   - bin/console doctrine:schema:update --force
   - bin/console doctrine:fixtures:load --append
-  - bin/phpunit
+  - bin/phpunit --coverage-html
