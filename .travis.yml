@@ -16,11 +16,12 @@ addons:
     packages:
       - mysql-server
 
+dist: trusty
+
+sudo: required
+
 install: |
   composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
-
-dist: trusty
-sudo: required
 
 script: 
   - bin/console doctrine:database:create --if-not-exists
