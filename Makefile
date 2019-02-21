@@ -1,7 +1,9 @@
 SYMFONY 	= ./bin/console
 PHPUNIT 	= ./bin/phpunit
 VENDOR 		= ./vendor/bin
+VAR 		= ./var/
 LOG 		= ./var/log
+CACHE 		= ./var/cache
 
 ## 
 ## Bases
@@ -27,6 +29,18 @@ server: install
 ## Cache
 ## -----
 ## 
+
+rml: ## remove log folder
+rml:
+	rm -rf $(LOG)
+	mkdir -p $(VAR)/log/
+.PHONY: rmc
+
+rmc: ## remove cache folder
+rmc:
+	rm -rf $(CACHE)
+	mkdir -p $(VAR)/cache/
+.PHONY: rmc
 
 ccd: ## clear cache DEV
 ccd: install
