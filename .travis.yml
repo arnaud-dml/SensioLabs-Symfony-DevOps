@@ -6,6 +6,9 @@ php:
 services: 
   - mysql
 
+before_install:
+  - mysql -u root --password=""
+
 addons:
   apt:
     sources:
