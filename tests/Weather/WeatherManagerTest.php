@@ -12,13 +12,19 @@ use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 class WeatherManagerTest extends TestCase
 {
-    /** @var MockObject|ObjectManager */
+    /**
+     * @var MockObject|ObjectManager
+     */
     private $entityManager;
 
-    /** @var MockObject|WeatherService */
+    /**
+     * @var MockObject|WeatherService
+     */
     private $weatherService;
 
-    /** @var WeatherManager */
+    /**
+     * @var WeatherManager
+     */
     private $manager;
 
     protected function setUp()

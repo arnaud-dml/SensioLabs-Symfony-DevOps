@@ -11,10 +11,14 @@ use App\Entity\Recipe;
 
 class RecipeManagerTest extends TestCase
 {
-    /** @var MockObject|ObjectManager */
+    /**
+     * @var MockObject|ObjectManager
+     */
     private $entityManager;
 
-    /** @var RecipeManager */
+    /**
+     * @var RecipeManager
+     */
     private $manager;
 
     protected function setUp()

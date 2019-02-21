@@ -116,8 +116,11 @@ phpcs: ## run PHP Code Sniffer (PSR1, PSR2, PSR12)
 phpcs: install
 	mkdir -p $(LOG)/phpcs/
 	$(VENDOR)/phpcs --standard=PSR1  src --ignore=./src/Kernel.php --report-full=$(LOG)/phpcs/PSR1.txt
+	$(VENDOR)/phpcs --standard=PSR1  tests --report-full=$(LOG)/phpcs/PSR1.txt
 	$(VENDOR)/phpcs --standard=PSR2  src --ignore=./src/Kernel.php --report-full=$(LOG)/phpcs/PSR2.txt
+	$(VENDOR)/phpcs --standard=PSR2  tests --report-full=$(LOG)/phpcs/PSR2.txt
 	$(VENDOR)/phpcs --standard=PSR12 src --ignore=./src/Kernel.php --report-full=$(LOG)/phpcs/PSR12.txt
+	$(VENDOR)/phpcs --standard=PSR12 tests --report-full=$(LOG)/phpcs/PSR12.txt
 .PHONY: phpcs
 
 phpcsfixer: ## run PHP Code Sniffer Fixer
@@ -128,12 +131,14 @@ phpcsfixer: install phpcs
 phpmd: ## run PHP Mess Detector
 phpmd: install
 	$(VENDOR)/phpmd src html ./phpmd.xml.dist > $(LOG)/phpmd.html
+	$(VENDOR)/phpmd tests html ./phpmd.xml.dist > $(LOG)/phpmd.html
 .PHONY: phpmd
 
 phpcpd: ## PHP Copy/Paste Detector
 phpcpd: install
 	mkdir -p $(LOG)/phpcpd/
 	$(VENDOR)/phpcpd src > $(LOG)/phpcpd/report.txt
+	$(VENDOR)/phpcpd tests > $(LOG)/phpcpd/report.txt
 .PHONY: phpcpd
 
 phpunit: ## run PHPUnit

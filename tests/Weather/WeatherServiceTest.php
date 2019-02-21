@@ -11,12 +11,12 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class WeatherServiceTest extends TestCase
 {
-    /** 
+    /**
      * @var MockObject|Curl
      */
     private $client;
 
-    /** 
+    /**
      * @var WeatherService
      */
     private $service;
@@ -37,7 +37,10 @@ class WeatherServiceTest extends TestCase
                     'error' => false,
                     'curl_error' => false,
                     'http_error' => false,
-                    'response' => '{"data":[{"parameter":"t_2m:C","coordinates":[{"lat":48.8568,"lon":2.3508,"dates":[{"date":"2019-02-20T22:40:50Z","value":12.7}]}]},{"parameter":"relative_humidity_2m:p","coordinates":[{"lat":48.8568,"lon":2.3508,"dates":[{"date":"2019-02-20T22:40:50Z","value":61.1}]}]}]}'
+                    'response' => '{"data":[{"parameter":"t_2m:C","coordinates":[{"lat":48.8568,' .
+                        '"lon":2.3508,"dates":[{"date":"2019-02-20T22:40:50Z","value":12.7}]}]},' .
+                        '{"parameter":"relative_humidity_2m:p","coordinates":[{"lat":48.8568,' .
+                        '"lon":2.3508,"dates":[{"date":"2019-02-20T22:40:50Z","value":61.1}]}]}]}'
                 )
             );
         $data = $this->service->getData('48.8568', '2.3508');

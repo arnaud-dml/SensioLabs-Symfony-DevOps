@@ -12,7 +12,9 @@ use PHPUnit\Framework\TestCase;
 
 class PlantTest extends TestCase
 {
-    /** @var Plant */
+    /**
+     * @var Plant
+     */
     private $plant;
 
     protected function setUp()

@@ -10,13 +10,19 @@ use App\DataFixtures\GardenerFixtures;
 
 class GardenerFixturesTest extends TestCase
 {
-    /** @var MockObject|UserPasswordEncoder */
+    /**
+     * @var MockObject|UserPasswordEncoder
+     */
     private $passwordEncoder;
 
-    /** @var MockObject|ObjectManager */
+    /**
+     * @var MockObject|ObjectManager
+     */
     private $entityManager;
 
-    /** @var GardenerFixtures */
+    /**
+     * @var GardenerFixtures
+     */
     private $gardenerFixtures;
 
     protected function setUp()

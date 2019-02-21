@@ -41,7 +41,7 @@ class SecurityControllerTest extends PantherTestCase
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('homepage');
-        self::assertRegExp("/".preg_quote($route,"/")."$/", $location);
+        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
 
         // $pantherClient = static::createPantherClient();
         // $crawler = $pantherClient->request('GET', '/login');
@@ -63,12 +63,12 @@ class SecurityControllerTest extends PantherTestCase
     public function testLoginAlready()
     {
         $this->authClient($this->client);
-        $crawler = $this->client->request('GET', '/login');
+        $this->client->request('GET', '/login');
         self::assertEquals(302, $this->client->getResponse()->getStatusCode());
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('homepage');
-        self::assertRegExp("/".preg_quote($route,"/")."$/", $location);
+        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
     }
 
     public function testLoginErrorUsername()
@@ -84,7 +84,7 @@ class SecurityControllerTest extends PantherTestCase
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('login');
-        self::assertRegExp("/".preg_quote($route,"/")."$/", $location);
+        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
     }
 
     public function testLoginErrorPassword()
@@ -100,7 +100,7 @@ class SecurityControllerTest extends PantherTestCase
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('login');
-        self::assertRegExp("/".preg_quote($route,"/")."$/", $location);
+        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
     }
 
     public function testLoginErrorCSRF()
@@ -117,7 +117,7 @@ class SecurityControllerTest extends PantherTestCase
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('login');
-        self::assertRegExp("/".preg_quote($route,"/")."$/", $location);
+        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
     }
 
     public function testLoginRedirect()
@@ -135,6 +135,6 @@ class SecurityControllerTest extends PantherTestCase
         self::assertEquals(302, $this->client->getResponse()->getStatusCode());
 
         $location = $this->client->getResponse()->headers->get('location');
-        self::assertRegExp("/".preg_quote($route,"/")."$/", $location);
+        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
     }
 }

@@ -11,10 +11,14 @@ use App\Entity\Pot;
 
 class PotManagerTest extends TestCase
 {
-    /** @var MockObject|ObjectManager */
+    /**
+     * @var MockObject|ObjectManager
+     */
     private $entityManager;
 
-    /** @var PotManager */
+    /**
+     * @var PotManager
+     */
     private $manager;
 
     protected function setUp()

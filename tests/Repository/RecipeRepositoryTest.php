@@ -7,7 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class RecipeRepositoryTest extends KernelTestCase
 {
-    /** @var \Doctrine\ORM\EntityManager */
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
     private $entityManager;
 
     protected function setUp()

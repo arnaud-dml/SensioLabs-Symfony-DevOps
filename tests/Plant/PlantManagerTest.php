@@ -11,10 +11,14 @@ use App\Entity\Plant;
 
 class PlantManagerTest extends TestCase
 {
-    /** @var MockObject|ObjectManager */
+    /**
+     * @var MockObject|ObjectManager
+     */
     private $entityManager;
 
-    /** @var PlantManager */
+    /**
+     * @var PlantManager
+     */
     private $manager;
 
     protected function setUp()

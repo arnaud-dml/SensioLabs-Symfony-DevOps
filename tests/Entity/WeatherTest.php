@@ -7,7 +7,9 @@ use PHPUnit\Framework\TestCase;
 
 class WeatherTest extends TestCase
 {
-    /** @var Weather */
+    /**
+     * @var Weather
+     */
     private $weather;
 
     protected function setUp()

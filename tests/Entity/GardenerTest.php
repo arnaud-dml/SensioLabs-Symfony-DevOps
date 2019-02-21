@@ -11,7 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 class GardenerTest extends TestCase
 {
-    /** @var Gardener */
+    /**
+     * @var Gardener
+     */
     private $gardener;
 
     protected function setUp()

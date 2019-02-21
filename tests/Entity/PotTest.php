@@ -11,7 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 class PotTest extends TestCase
 {
-    /** @var Pot */
+    /**
+     * @var Pot
+     */
     private $pot;
 
     protected function setUp()

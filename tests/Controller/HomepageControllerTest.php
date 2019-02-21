@@ -24,7 +24,7 @@ class HomepageControllerTest extends PantherTestCase
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('login');
-        self::assertRegExp("/".preg_quote($route,"/")."$/", $location);
+        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
 
         $this->authClient($this->client);
         $this->client->request('GET', '/');

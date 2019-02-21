@@ -17,7 +17,7 @@ trait AuthClientTrait
         $firewallName = 'main';
         $firewallContext = 'main';
         $token = new UsernamePasswordToken('user', null, $firewallName, ['ROLE_USER']);
-        $session->set('_security_'.$firewallContext, serialize($token));
+        $session->set('_security_' . $firewallContext, serialize($token));
         $session->save();
         $cookie = new Cookie($session->getName(), $session->getId());
         $client->getCookieJar()->set($cookie);

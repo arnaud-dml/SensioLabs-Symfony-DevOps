@@ -9,7 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 class RecipeTest extends TestCase
 {
-    /** @var Recipe */
+    /**
+     * @var Recipe
+     */
     private $recipe;
 
     protected function setUp()

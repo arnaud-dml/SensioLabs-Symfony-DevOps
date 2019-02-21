@@ -10,10 +10,14 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class WeatherCommandTest extends TestCase
 {
-    /** @var MockObject|WeatherManager */
+    /**
+     * @var MockObject|WeatherManager
+     */
     private $weatherManager;
 
-    /** @var WeatherCommand */
+    /**
+     * @var WeatherCommand
+     */
     private $weatherCommand;
 
     protected function setUp()

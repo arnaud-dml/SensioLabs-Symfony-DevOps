@@ -10,7 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 class PlantTypeTest extends TestCase
 {
-    /** @var PlantType */
+    /**
+     * @var PlantType
+     */
     private $plantType;
 
     protected function setUp()
