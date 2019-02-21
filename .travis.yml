@@ -3,11 +3,11 @@ language: php
 php: 
   - '7.3'
 
+env:
+  - DATABASE_URL=mysql://root:@127.0.0.1:3306/oai
+
 services: 
   - mysql
-
-before_install:
-  - mysql -u root --password=""
 
 addons:
   apt:
@@ -20,11 +20,7 @@ install: |
   composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
 
 dist: trusty
-
 sudo: required
-
-before_script:
-  - mysql -e 'create database oai;'
 
 script: 
   - bin/console doctrine:database:create --if-not-exists
