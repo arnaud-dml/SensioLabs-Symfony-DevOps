@@ -24,12 +24,17 @@ dist: trusty
 
 sudo: required
 
-install: |
-  composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
+install:
+  - composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
+  - travis_retry install --no-interaction --no-suggest
 
 script: 
   - bin/console doctrine:database:create --if-not-exists
   - bin/console doctrine:schema:create
   - bin/console doctrine:schema:update --force
   - bin/console doctrine:fixtures:load --append
-  - bin/phpunit --coverage-html
+  - bin/phpunit
+  - composer test -- --coverage-clover=coverage.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
