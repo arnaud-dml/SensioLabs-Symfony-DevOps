@@ -25,8 +25,7 @@ dist: trusty
 sudo: required
 
 install:
-  - composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
-  - travis_retry install --no-interaction --no-suggest
+  - travis_retry composer install --no-interaction --no-suggest
 
 script: 
   - bin/console doctrine:database:create --if-not-exists
