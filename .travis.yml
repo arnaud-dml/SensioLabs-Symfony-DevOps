@@ -5,4 +5,12 @@ php: '7.3'
 install: |
   composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
 
-script: bin/phpunit
+services:
+  - mysql
+
+script: 
+  - bin/console doctrine:database:create --if-not-exists
+  - bin/console doctrine:schema:create
+  - bin/console doctrine:schema:update --force
+  - bin/console doctrine:fixtures:load --append
+  - bin/phpunit
