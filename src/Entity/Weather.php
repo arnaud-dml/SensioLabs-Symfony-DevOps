@@ -22,12 +22,12 @@ class Weather
     private $location;
 
     /**
-     * @ORM\Column(type="decimal", precision=3, scale=0)
+     * @ORM\Column(type="decimal", precision=3, scale=1)
      */
     private $temperature;
 
     /**
-     * @ORM\Column(type="decimal", precision=3, scale=0)
+     * @ORM\Column(type="decimal", precision=3, scale=1)
      */
     private $humidity;
 
