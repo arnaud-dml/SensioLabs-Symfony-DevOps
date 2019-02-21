@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/julienvolle/SensioLabs-OpenAG.svg?branch=master)](https://travis-ci.com/julienvolle/SensioLabs-OpenAG)
-
+[![Coverage](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG/branch/master/graph/badge.svg)](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG)
 
 Open Agriculture Initiative
 =
