@@ -33,7 +33,7 @@ script:
   - bin/console doctrine:schema:update --force
   - bin/console doctrine:fixtures:load --append
   - bin/phpunit
-  - composer test -- --coverage-clover=coverage.xml
+  - bin/phpunit --coverage-clover=coverage.xml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
