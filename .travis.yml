@@ -1,0 +1,8 @@
+language: php
+
+php: '7.3'
+
+install: |
+  composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+script: bin/phpunit
