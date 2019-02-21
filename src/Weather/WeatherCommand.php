@@ -21,7 +21,7 @@ class WeatherCommand extends Command
     
     /**
      * Constructor
-     * 
+     *
      * @param WeatherManager $weatherManager
      */
     public function __construct(WeatherManager $weatherManager)
@@ -33,7 +33,7 @@ class WeatherCommand extends Command
     
     /**
      * Configure
-     * 
+     *
      * @todo command "php bin/console list": show a short description
      * @todo command "php bin/console $defaultName --help": show full description
      */
@@ -47,7 +47,7 @@ class WeatherCommand extends Command
     
     /**
      * Execute
-     * 
+     *
      * @param InputInterface $input
      * @param OutputInterface $output
      */
@@ -66,7 +66,6 @@ class WeatherCommand extends Command
             'Weather has been recovered!',
             '-> weather_id = ' . $weather->getId(),
             '',
-            'Date:        ' . $weather->getDate()->format('Y-m-d H:i:s'),
             'Location:    ' . $weather->getLocation(),
             'Temperature: ' . $weather->getTemperature() . ' °C',
             'Humidity:    ' . $weather->getHumidity() . ' %',
