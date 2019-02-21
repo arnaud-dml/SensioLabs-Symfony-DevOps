@@ -1,6 +1,6 @@
 {
-    "name": "OpenAgricultureInitiative",
-    "description": "The MIT Media Lab Open Agriculture Initiative (OpenAg) builds open resources to enable a global community to accelerate digital agricultural innovation.",
+    "name": "oai/sensiolabs",
+    "description": "The MIT Media Lab OAI (Open Agriculture Initiative) builds open resources to enable a global community to accelerate digital agricultural innovation.",
     "type": "project",
     "license": "proprietary",
     "require": {

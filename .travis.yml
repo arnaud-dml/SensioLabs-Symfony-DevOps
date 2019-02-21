@@ -1,12 +1,27 @@
 language: php
 
-php: '7.3'
+php: 
+  - '7.3'
+
+services: 
+  - mysql
+
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
 
 install: |
   composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
 
-services:
-  - mysql
+dist: trusty
+
+sudo: required
+
+before_script:
+  - mysql -e 'create database oai;'
 
 script: 
   - bin/console doctrine:database:create --if-not-exists
