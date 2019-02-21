@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "name": "OpenAgricultureInitiative",
+=======
+    "name": "open_agriculture_initiative",
+>>>>>>> 0b0c34981f6bd3f2183eecc318dce87a748e9791
     "description": "The MIT Media Lab Open Agriculture Initiative (OpenAg) builds open resources to enable a global community to accelerate digital agricultural innovation.",
     "type": "project",
     "license": "proprietary",
