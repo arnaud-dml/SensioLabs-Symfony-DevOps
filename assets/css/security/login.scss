@@ -1,0 +1,40 @@
+body {
+    background-image: url('../../img/field.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+
+    section {
+    
+        h1 { font-size: 5.0rem !important; line-height: 1em;  text-shadow: 0px 0px 10px #23272b; }
+        h2 { font-size: 1.5rem !important; line-height: 1em;  text-shadow: 0px 0px 10px #23272b; }
+        h3 { font-size: 2.5rem !important; line-height: 1em; }
+        
+        #header {
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        #auth {
+            width: 100%;
+            max-width: 400px;
+            background-color: #eee !important;
+            background-color: rgba($color: #eee, $alpha: 0.9) !important;
+        
+            input, button {
+                border-radius: 0;
+            }
+    
+            label[for=remember_me] {
+                cursor: pointer;
+            }
+    
+            .custom-control-input:checked ~ .custom-control-label::before {
+                border-color: #23272b;
+                background-color: #23272b;
+            }
+        }
+
+    }
+}

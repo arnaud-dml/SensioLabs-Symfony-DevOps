@@ -1,64 +1,71 @@
 {% extends 'base.html.twig' %}
 
+{% block html_attributs %}{{ parent() }} class="h-100"{% endblock %}
+{% block body_attributs %}{{ parent() }} class="d-flex flex-column h-100"{% endblock %}
+
 {% block title %}{{ parent() }} | Login{% endblock %}
 
+{% block stylesheets %}
+
+    {{ parent() }}
+    {{ encore_entry_link_tags('css/security/login') }}
+
+{% endblock %}
+
 {% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col py-5">
 
-            <h1>Login</h1>
+    <section class="m-auto">
 
-            {# {{ form_start(form) }}
-            {{ form_errors(form) }}
-            <div class="form-group">
-                {{ form_label(form._username, 'Username') }}
-                {{ form_widget(form._username, {'attr': {'class': 'form-control-sm'}}) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form._password, 'Password') }}
-                {{ form_widget(form._password, {'attr': {'class': 'form-control-sm'}}) }}
-            </div>
-            <div class="form-group">
-                {{ form_widget(form._remember_me, {'label': 'Remember me ?'}) }}
-            </div>
-            <div class="form-group">
-                {{ form_widget(form.ok, {'label': 'Submit', 'attr': {'class': 'btn-sm btn-success'}}) }}
-            </div>
-            {{ form_row(form._token) }}
-            {{ form_end(form) }} #}
+        <div id="header" class="p-5 mx-auto">
+            <h1 class="display-1 text-white text-center">Open Agriculture Initiative</h1>
+            <h2 class="display-1 text-white text-center px-5">The MIT Media Lab &laquo;&nbsp;Open Agriculture Initiative&nbsp;&raquo; builds open resources to enable a global community to accelerate digital agricultural innovation.</h2>
+        </div>
 
-            {# {% dump %} #}
+        <div id="auth" class="px-4 pt-3 pb-4 mx-auto shadow">
 
-            <form method="post">
+            <h3 class="display-1 mb-3">Authenticate</h3>
 
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-
-                <div class="form-group">
-                    <label for="inputUsername" class="sr-only">Username</label>
-                    <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-control form-control-sm" placeholder="Username" required autofocus>
-                </div>
-                
-                <div class="form-group">
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" name="_password" id="inputPassword" class="form-control form-control-sm" placeholder="Password" required>
-                </div>
+            <form method="post" class="form-signin">
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Remember me
-                    </label>
+                {% if error %}
+                <div class="form-group mb-2">
+                    <code class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ error.messageKey|trans(error.messageData, 'security') }}</code>
+                </div>
+                {% endif %}
+
+                <div class="form-group mb-2">
+                    <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" style="width:120px;"><i class="fas fa-user"></i> &nbsp; Username</div>
+                        </div>
+                        <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-control" required autofocus>
+                    </div>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" style="width:120px;"><i class="fas fa-unlock-alt"></i> &nbsp; Password</div>
+                        </div>
+                        <input type="password" name="_password" id="inputPassword" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="custom-control custom-checkbox mb-2">
+                    <input type="checkbox" name="_remember_me" class="custom-control-input" id="remember_me">
+                    <label class="custom-control-label" for="remember_me">Remember me</label>
                 </div>
                     
-                <button class="btn btn-sm btn-primary" type="submit" id ="submit">Sign in</button>
+                <div class="form-group mb-0 text-right">
+                    <button class="btn btn-dark" type="submit" id ="submit">Submit</button>
+                </div>
+
             </form>
 
         </div>
-    </div>
-</div>
+
+    <section>
 
 {% endblock %}
