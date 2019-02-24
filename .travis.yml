@@ -28,10 +28,21 @@ install:
   - travis_retry composer install --no-interaction --no-suggest
 
 script: 
-  - bin/console doctrine:database:create --if-not-exists
-  - bin/console doctrine:schema:create
+  - bin/console doctrine:database:create
   - bin/console doctrine:schema:update --force
   - bin/console doctrine:fixtures:load --append
+  - bin/console lint:twig templates
+  - bin/console lint:yaml templates
+	- vendor/bin/phpcs --standard=PSR1  src --ignore=./src/Kernel.php
+	- vendor/bin/phpcs --standard=PSR2  src --ignore=./src/Kernel.php
+	- vendor/bin/phpcs --standard=PSR12 src --ignore=./src/Kernel.php
+  - vendor/bin/phpmd src html ./phpmd.xml.dist
+  - vendor/bin/phpcpd src
+	- vendor/bin/phpcs --standard=PSR1  tests
+	- vendor/bin/phpcs --standard=PSR2  tests
+  - vendor/bin/phpcs --standard=PSR12 tests
+  - vendor/bin/phpmd tests html ./phpmd.xml.dist
+  - vendor/bin/phpcpd tests
   - bin/phpunit
   - bin/phpunit --coverage-clover=coverage.xml
 
