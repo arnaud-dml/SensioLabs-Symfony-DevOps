@@ -27,7 +27,7 @@ sudo: required
 install:
   - composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
   - npm install
-  - npm run prod
+  - npm run build
 
 cache:
   directories:
