@@ -35,8 +35,7 @@ cache:
     - "node_modules"
 
 script: 
-  - make phpcs
-  - bin/phpunit --coverage-clover=coverage.xml
+  - make travis
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

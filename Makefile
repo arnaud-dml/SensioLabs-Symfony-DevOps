@@ -160,12 +160,12 @@ phpunit: install
 	$(PHPUNIT)
 .PHONY: phpunit
 
-panther: ## run PHPUnit Panther
+panther: ## run PHPUnit with Panther
 panther: install
 	PANTHER_NO_HEADLESS=1 $(PHPUNIT)
 .PHONY: panther
 
-coverage: ## run PHPUnit Coverage
+coverage: ## run PHPUnit with Coverage
 coverage: install
 	mkdir -p $(LOG)/phpunit/coverage/
 	$(PHPUNIT) --coverage-html=$(LOG)/phpunit/coverage
@@ -180,6 +180,23 @@ phpmetrics: install
 tests: ## run all tests
 tests: twig yaml phpcs phpmd phpcpd coverage phpmetrics
 .PHONY: tests
+
+travis: ## run all tests for Travis
+travis: install
+	$(SYMFONY) lint:twig templates
+	$(SYMFONY) lint:yaml config
+	$(VENDOR)/phpcs --standard=PSR1  src --ignore=./src/Kernel.php
+	$(VENDOR)/phpcs --standard=PSR2  src --ignore=./src/Kernel.php
+	$(VENDOR)/phpcs --standard=PSR12 src --ignore=./src/Kernel.php
+	$(VENDOR)/phpmd src html ./phpmd.xml.dist
+	$(VENDOR)/phpcpd src
+	$(VENDOR)/phpcs --standard=PSR1  tests
+	$(VENDOR)/phpcs --standard=PSR2  tests
+	$(VENDOR)/phpcs --standard=PSR12 tests
+	$(VENDOR)/phpmd tests html ./phpmd.xml.dist
+	$(VENDOR)/phpcpd tests
+	$(PHPUNIT) --coverage-clover=coverage.xml
+.PHONY: travis
 
 ## 
 ## Tools
