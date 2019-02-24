@@ -27,6 +27,7 @@ sudo: required
 install:
   - composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
   - npm i npm@latest -g && npm install && npm run build
+  - bin/console d:d:c && bin/console d:s:u --force && bin/console d:f:l --append
 
 cache:
   directories:
@@ -34,9 +35,6 @@ cache:
     - "node_modules"
 
 script: 
-  - bin/console doctrine:database:create
-  - bin/console doctrine:schema:update --force
-  - bin/console doctrine:fixtures:load --append
   - bin/phpunit --coverage-clover=coverage.xml
 
 after_success:
