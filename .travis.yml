@@ -43,7 +43,6 @@ script:
   - vendor/bin/phpcs --standard=PSR12 tests
   - vendor/bin/phpmd tests html ./phpmd.xml.dist
   - vendor/bin/phpcpd tests
-  - bin/phpunit
   - bin/phpunit --coverage-clover=coverage.xml
 
 after_success:
