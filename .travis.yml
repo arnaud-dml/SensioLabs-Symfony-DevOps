@@ -26,8 +26,7 @@ sudo: required
 
 install:
   - composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
-  - npm install
-  - npm run build
+  - npm i npm@latest -g && npm install && npm run build
 
 cache:
   directories:
@@ -38,6 +37,18 @@ script:
   - bin/console doctrine:database:create
   - bin/console doctrine:schema:update --force
   - bin/console doctrine:fixtures:load --append
+  - bin/console lint:twig templates
+  - bin/console lint:yaml templates
+  - vendor/bin/phpcs --standard=PSR1  src --ignore=./src/Kernel.php
+	- vendor/bin/phpcs --standard=PSR2  src --ignore=./src/Kernel.php
+  - vendor/bin/phpcs --standard=PSR12 src --ignore=./src/Kernel.php
+  - vendor/bin/phpmd src html ./phpmd.xml.dist
+  - vendor/bin/phpcpd src
+	- vendor/bin/phpcs --standard=PSR1  tests
+	- vendor/bin/phpcs --standard=PSR2  tests
+	- vendor/bin/phpcs --standard=PSR12 tests
+	- vendor/bin/phpmd tests html ./phpmd.xml.dist
+  - vendor/bin/phpcpd tests
   - bin/phpunit --coverage-clover=coverage.xml
 
 after_success:
