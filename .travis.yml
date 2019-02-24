@@ -26,6 +26,13 @@ sudo: required
 
 install:
   - composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
+  - npm install
+  - npm run prod
+
+cache:
+  directories:
+    - "vendor"
+    - "node_modules"
 
 script: 
   - bin/console doctrine:database:create
