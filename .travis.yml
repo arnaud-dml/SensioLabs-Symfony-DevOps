@@ -35,6 +35,7 @@ cache:
     - "node_modules"
 
 script: 
+  - make phpcs
   - bin/phpunit --coverage-clover=coverage.xml
 
 after_success:
