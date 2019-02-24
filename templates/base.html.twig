@@ -4,28 +4,100 @@
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Open Agriculture Initiative{% endblock %}</title>
-        {% block stylesheets %}
-        {{ encore_entry_link_tags('css/app') }}
-        {% endblock %}
+        {% block stylesheets %}{{ encore_entry_link_tags('css/app') }}{% endblock %}
     </head>
-    <body{% block body_attributs %}{% endblock %}>
+    <body{% block body_attributs %} class="hold-transition skin-green sidebar-mini"{% endblock %}>
         {% block body %}
-        <div class="container">
-            <div class="row">
-                <div class="col py-5">
 
-                    <div class="jumbotron">
-                        <h1 class="display-4">Open Agriculture Initiative</h1>
-                        <p class="lead">The MIT Media Lab OAI (Open Agriculture Initiative) builds open resources to enable a global community to accelerate digital agricultural innovation.</p>
-                        <a class="btn btn-primary btn-lg" href="https://www.media.mit.edu/groups/open-agriculture-openag/overview/" role="button">Learn more</a>
+        <!-- WRAPPER -->
+		<div class="wrapper">
+			
+			<!-- HEADER -->
+			<header class="main-header">
+
+				<!-- TITLE -->
+                <a href="#" class="logo">
+                    <span class="logo-mini"><strong>O</strong>AI</span>
+                    <span class="logo-lg"><strong>Open</strong> Agriculture Initiative</span>
+                </a>
+                <!-- /TITLE -->
+
+                <!-- NAVIGATION -->
+                <nav class="navbar navbar-static-top">
+                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                </nav>
+                <!-- /NAVIGATION -->
+
+			</header>
+			<!-- /HEADER -->
+
+			<!-- SIDEBAR -->
+			<aside class="main-sidebar">
+                <section class="sidebar">
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="header">MAIN NAVIGATION</li>
+                        <li class="active"><a href="{{ path('homepage') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                        <li class="treeview">
+                            <a class="cursor-pointer"><i class="fa fa-user-circle"></i> <span>Account</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-gear"></i> <span>Setting</span></a></li>
+                                <li><a href="{{ path('logout') }}"><i class="fa fa-unlock-alt"></i> <span>Sign out</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a class="cursor-pointer"><i class="fa fa-tree"></i> <span>Garden</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-leaf"></i> <span>Plant</span></a></li>
+                                <li><a href="#"><i class="fa fa-heartbeat"></i> <span>Recipe</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+			</aside>
+			<!-- /SIDEBAR -->
+
+			<!-- MAIN -->
+			<main role="main" class="content-wrapper">
+				
+				<!-- ARIANE -->
+				<section class="content-header">
+                    <h1>Dashboard <small>version 0.0.1</small></h1>
+                    <ol class="breadcrumb">
+                        <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+                    </ol>
+				</section>
+				<!-- /ARIANE -->
+
+				<!-- MAIN_CONTENT -->
+				<section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            Hello world!
+
+                            {# <div class="jumbotron">
+                                <h1 class="display-4">Open Agriculture Initiative</h1>
+                                <p class="lead">The MIT Media Lab OAI (Open Agriculture Initiative) builds open resources to enable a global community to accelerate digital agricultural innovation.</p>
+                                <a class="btn btn-primary btn-lg" href="https://www.media.mit.edu/groups/open-agriculture-openag/overview/" role="button">Learn more</a>
+                            </div> #}
+
+                        </div>
                     </div>
+				</section>
+				<!-- /MAIN_CONTENT -->
 
-                </div>
-            </div>
-        </div>
+			</main>
+			<!-- MAIN -->
+
+			<!-- FOOTER -->
+			<footer class="main-footer">
+				---- footer ---
+			</footer>
+			<!-- /FOOTER -->
+
         {% endblock %}
-        {% block javascripts %}
-        {{ encore_entry_script_tags('js/app') }}
-        {% endblock %}
+        {% block javascripts %}{{ encore_entry_script_tags('js/app') }}{% endblock %}
     </body>
 </html>

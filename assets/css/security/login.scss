@@ -1,21 +1,36 @@
+// BOOTSTRAP
+@import "~bootstrap/scss/bootstrap";
+
+// STYLESHEET
 body {
-    background-image: url('../../img/field.jpg');
+    background-image: url('../../img/security/background.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     background-color: white;
 
     section {
+        width: 100%;
     
         h1 { font-size: 5.0rem !important; line-height: 1em;  text-shadow: 0px 0px 10px #23272b; }
         h2 { font-size: 1.5rem !important; line-height: 1em;  text-shadow: 0px 0px 10px #23272b; }
         h3 { font-size: 2.5rem !important; line-height: 1em; }
+
+        @include media-breakpoint-down(md) {
+            h1 { font-size: 4.0rem !important; }
+        }
+
+        @include media-breakpoint-down(sm) {
+            h1 { font-size: 3.0rem !important; }
+            h2 { font-size: 1.25rem !important; }
+            h3 { font-size: 1.5rem !important; }
+        }
         
         #header {
             width: 100%;
             max-width: 1000px;
         }
-        
+
         #auth {
             width: 100%;
             max-width: 400px;
@@ -25,16 +40,15 @@ body {
             input, button {
                 border-radius: 0;
             }
-    
+
             label[for=remember_me] {
                 cursor: pointer;
             }
-    
+
             .custom-control-input:checked ~ .custom-control-label::before {
                 border-color: #23272b;
                 background-color: #23272b;
             }
         }
-
     }
 }

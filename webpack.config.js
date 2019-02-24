@@ -6,6 +6,7 @@ Encore
     .cleanupOutputBeforeBuild()
 
     .addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/security/login', './assets/js/security/login.js')
     .autoProvidejQuery()
 
     .addStyleEntry('css/app', './assets/css/app.scss')

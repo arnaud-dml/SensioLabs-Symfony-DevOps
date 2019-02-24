@@ -1,14 +1,10 @@
 // JQUERY
-const $ = require('jquery');
+require('admin-lte/bower_components/jquery/dist/jquery.min.js');
+require('admin-lte/bower_components/jquery-ui/jquery-ui.min.js');
 
-// FONT AWESOME
-require('@fortawesome/fontawesome-free/css/all.min.css');
-require('@fortawesome/fontawesome-free/js/all.js');
+// BOOTSTRAP
+require('admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js');
+require('admin-lte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js');
 
-// BOOTSTRAP (JS)
-require('bootstrap');
-
-// APP
-$(function(){
-    console.info('jQuery is ready!');
-});
+// ADMIN LTE
+require('admin-lte/dist/js/adminlte.min.js');

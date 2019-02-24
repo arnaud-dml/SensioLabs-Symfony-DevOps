@@ -1,2 +1,21 @@
-// BOOTSTRAP (SASS)
-@import "~bootstrap/scss/bootstrap";
+// BOOTSTRAP
+@import "~admin-lte/bower_components/bootstrap/dist/css/bootstrap.min.css";
+@import "~admin-lte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css";
+
+// FONT AWESOME
+@import "~admin-lte/bower_components/font-awesome/css/font-awesome.min.css";
+
+// ADMIN LTE
+@import "~admin-lte/dist/css/AdminLTE.min.css";
+@import "~admin-lte/dist/css/skins/_all-skins.min.css";
+
+// STYLESHEET
+.cursor-pointer {
+    cursor: pointer !important;
+}
+.main-header .logo {
+    font-size: 16px;
+}
+.content-wrapper .breadcrumb i.fa {
+    margin-right: 4px;
+}
