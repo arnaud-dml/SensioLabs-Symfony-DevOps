@@ -16,12 +16,23 @@ composer.lock: composer.json
 vendor: composer.lock
 	composer install --no-scripts --no-progress --no-interaction
 
-install: ## composer install/update
-install: vendor
+package-lock.json: package.json
+	npm update
+
+node_modules: package-lock.json
+	npm install
+
+install: ## install/update PHP & JS dependencies (Composer & NPM)
+install: vendor node_modules
 .PHONY: install
 
+build: ## build assets
+build: install
+	npm run build
+.PHONY: build
+
 server: ## run server
-server: install
+server: install build
 	$(SYMFONY) server:run
 .PHONY: server
 
@@ -33,13 +44,13 @@ server: install
 rml: ## remove log folder
 rml:
 	rm -rf $(LOG)
-	mkdir -p $(VAR)/log/
+	mkdir -p $(LOG)
 .PHONY: rmc
 
 rmc: ## remove cache folder
 rmc:
 	rm -rf $(CACHE)
-	mkdir -p $(VAR)/cache/
+	mkdir -p $(CACHE)
 .PHONY: rmc
 
 ccd: ## clear cache DEV
@@ -61,6 +72,10 @@ cc: ## clear cache
 cc: install
 	$(SYMFONY) cache:clear
 .PHONY: cc
+
+rca: ## remove and clear all
+rca: cc rmc ccd
+.PHONY: rca
 
 ## 
 ## Doctrine
@@ -188,12 +203,12 @@ travis: install
 	$(VENDOR)/phpcs --standard=PSR1  src --ignore=./src/Kernel.php
 	$(VENDOR)/phpcs --standard=PSR2  src --ignore=./src/Kernel.php
 	$(VENDOR)/phpcs --standard=PSR12 src --ignore=./src/Kernel.php
-	$(VENDOR)/phpmd src html ./phpmd.xml.dist
+	$(VENDOR)/phpmd src text ./phpmd.xml.dist
 	$(VENDOR)/phpcpd src
 	$(VENDOR)/phpcs --standard=PSR1  tests
 	$(VENDOR)/phpcs --standard=PSR2  tests
 	$(VENDOR)/phpcs --standard=PSR12 tests
-	$(VENDOR)/phpmd tests html ./phpmd.xml.dist
+	$(VENDOR)/phpmd tests text ./phpmd.xml.dist
 	$(VENDOR)/phpcpd tests
 	$(PHPUNIT) --coverage-clover=coverage.xml
 .PHONY: travis
