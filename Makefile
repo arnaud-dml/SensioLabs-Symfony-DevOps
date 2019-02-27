@@ -220,7 +220,7 @@ travis: install
 
 uml: ## generate diagram of class with PlantUML (https://packagist.org/packages/jawira/plantuml)
 uml: install
-	vendor/bin/plantuml /docs/uml/diagram-class.puml
+	$(VENDOR)/plantuml ./docs/uml/diagram-class.puml
 .PHONY: uml
 
 .DEFAULT_GOAL := help
