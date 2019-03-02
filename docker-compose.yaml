@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+
+    apache:
+        container_name: oai_apache
+        build: ./docker/httpd/
+        image: oai_apache
+        depends_on:
+            - php
+        ports:
+            - 8080:80
+        networks:
+            - backend
+        volumes:
+            - ./docker/httpd/conf/default.conf:/usr/local/apache2/conf/default.conf
+            - ./:/var/www/html/
+    
+    php:
+        container_name: oai_php
+        build: ./docker/php/
+        image: oai_php
+        ports:
+            - 9000:9000
+        networks:
+            - backend
+        volumes:
+            - ./docker/php/conf/php.ini:/usr/local/etc/php/conf.d/php-custom.ini
+            - ./:/var/www/html/
+    
+    db:
+        container_name: oai_db
+        build: ./docker/mysql/
+        image: oai_db
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        ports:
+            - 3306:3306
+        networks:
+            - backend
+        volumes: 
+            - ./docker/mysql/var/:/var/lib/mysql/
+        environment:
+            - MYSQL_ROOT_PASSWORD=${DB_PASS_ROOT}
+            - MYSQL_DATABASE=${DB_NAME}
+            - MYSQL_USER=${DB_USER}
+            - MYSQL_PASSWORD=${DB_PASS}
+
+    dbms:
+        container_name: oai_dbms
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        ports:
+            - 8181:80
+        networks:
+            - backend
+
+networks:
+    backend:

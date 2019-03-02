@@ -1,7 +1,6 @@
 SYMFONY 	= ./bin/console
 PHPUNIT 	= ./bin/phpunit
 VENDOR 		= ./vendor/bin
-VAR 		= ./var/
 LOG 		= ./var/log
 CACHE 		= ./var/cache
 

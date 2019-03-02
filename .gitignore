@@ -22,6 +22,10 @@
 /phpcs.xml
 ###< squizlabs/php_codesniffer ###
 
+###> docker ###
+/docker/mysql/var/
+###< docker ###
+
 ###> notes ###
 notes.txt
 ###< notes ###
