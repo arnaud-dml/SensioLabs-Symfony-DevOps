@@ -1,8 +1,11 @@
-SYMFONY 	= ./bin/console
-PHPUNIT 	= ./bin/phpunit
-VENDOR 		= ./vendor/bin
-LOG 		= ./var/log
-CACHE 		= ./var/cache
+ifdef DOCKER
+PREFIX = docker exec -ti $(DOCKER)
+endif
+SYMFONY = $(PREFIX) php bin/console
+PHPUNIT = $(PREFIX) php bin/phpunit
+VENDOR 	= $(PREFIX) ./vendor/bin
+LOG 	= $(PREFIX) ./var/log
+CACHE 	= $(PREFIX) ./var/cache
 
 ## 
 ## Bases
@@ -73,7 +76,7 @@ cc: install
 .PHONY: cc
 
 rca: ## remove and clear all
-rca: cc rmc ccd
+rca: rmc ccd ccp cct
 .PHONY: rca
 
 ## 
