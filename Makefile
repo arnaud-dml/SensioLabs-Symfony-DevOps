@@ -38,6 +38,21 @@ server: install build
 	$(SYMFONY) server:run
 .PHONY: server
 
+docker_start: ## start docker
+docker_start:
+	docker-compose up -d --build
+	@echo "-------------------------"
+	@echo "Let's go!"
+	@echo "-> http://localhost:8080/"
+	@echo "-> http://localhost:8181/"
+	@echo "-------------------------"
+.PHONY: docker_start
+
+docker_stop: ## stop docker
+docker_stop:
+	docker-compose down
+.PHONY: docker_stop
+
 ## 
 ## Cache
 ## -----
