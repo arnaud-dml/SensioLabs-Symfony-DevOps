@@ -1,15 +1,16 @@
-[![Build Status](https://travis-ci.org/julienvolle/SensioLabs-OpenAG.svg?branch=master)](https://travis-ci.org/julienvolle/SensioLabs-OpenAG)
-[![Coverage](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG/branch/master/graph/badge.svg)](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG)
-
 # Open Agriculture Initiative
 
 The MIT Media Lab Open Agriculture Initiative builds open resources to enable a global community to accelerate digital agricultural innovation.  
 
 > See: [https://www.media.mit.edu/open-agriculture-openag/](https://www.media.mit.edu/groups/open-agriculture-openag/overview/)
 
+[![Build Status](https://travis-ci.org/julienvolle/SensioLabs-OpenAG.svg?branch=master)](https://travis-ci.org/julienvolle/SensioLabs-OpenAG){:target="_blank"}
+[![Coverage](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG/branch/master/graph/badge.svg)](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG){:target="_blank"}
+
 ## Install
 
 Use [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) to start the project:
+
 - Start server: `docker-compose up -d`  
 - Create database: `docker exec -ti oai_php php bin/console d:d:c --if-not-exists`  
 - Build schema database: `docker exec -ti oai_php php bin/console d:s:u --force`  

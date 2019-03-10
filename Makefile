@@ -1,5 +1,5 @@
 ifdef DOCKER
-PREFIX = docker exec -ti $(DOCKER)
+PREFIX = docker exec -ti oai_php
 endif
 SYMFONY = $(PREFIX) php bin/console
 PHPUNIT = $(PREFIX) php bin/phpunit
@@ -189,18 +189,18 @@ phpcpd: install
 
 phpunit: ## run PHPUnit
 phpunit: install
-	$(PHPUNIT)
+	$(PHPUNIT) --exclude-group panther
 .PHONY: phpunit
 
 panther: ## run PHPUnit with Panther
 panther: install
-	PANTHER_NO_HEADLESS=1 $(PHPUNIT)
+	PANTHER_NO_HEADLESS=1 $(PHPUNIT) --group panther
 .PHONY: panther
 
 coverage: ## run PHPUnit with Coverage
 coverage: install
 	mkdir -p $(LOG)/phpunit/coverage/
-	$(PHPUNIT) --coverage-html=$(LOG)/phpunit/coverage
+	$(PHPUNIT) --coverage-html=$(LOG)/phpunit/coverage --exclude-group panther
 .PHONY: coverage
 
 phpmetrics: ## run PHP Metrix
@@ -227,7 +227,7 @@ travis: install
 	$(VENDOR)/phpcs --standard=PSR12 tests
 	$(VENDOR)/phpmd tests text ./phpmd.xml.dist
 	$(VENDOR)/phpcpd tests
-	$(PHPUNIT) --coverage-clover=coverage.xml
+	$(PHPUNIT) --coverage-clover=coverage.xml --exclude-group panther
 .PHONY: travis
 
 ## 
