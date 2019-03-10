@@ -4,8 +4,8 @@ The MIT Media Lab Open Agriculture Initiative builds open resources to enable a 
 
 > See: [https://www.media.mit.edu/open-agriculture-openag/](https://www.media.mit.edu/groups/open-agriculture-openag/overview/)
 
-[![Build Status](https://travis-ci.org/julienvolle/SensioLabs-OpenAG.svg?branch=master)](https://travis-ci.org/julienvolle/SensioLabs-OpenAG){:target="_blank"}
-[![Coverage](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG/branch/master/graph/badge.svg)](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG){:target="_blank"}
+[![Build Status](https://travis-ci.org/julienvolle/SensioLabs-OpenAG.svg?branch=master)](https://travis-ci.org/julienvolle/SensioLabs-OpenAG)
+[![Coverage](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG/branch/master/graph/badge.svg)](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG)
 
 ## Install
 
