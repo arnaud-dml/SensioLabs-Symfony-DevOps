@@ -34,8 +34,8 @@ build: install
 .PHONY: build
 
 server: ## run server
-server: install build
-	$(SYMFONY) server:run
+server: install
+	$(SYMFONY) server:run 127.0.0.1:8080 -d public
 .PHONY: server
 
 docker_start: ## start docker
@@ -192,9 +192,12 @@ phpunit: install
 	$(PHPUNIT) --exclude-group panther
 .PHONY: phpunit
 
+ifdef PNH
+MODE = PANTHER_NO_HEADLESS=$(PNH)
+endif
 panther: ## run PHPUnit with Panther
 panther: install
-	PANTHER_NO_HEADLESS=1 $(PHPUNIT) --group panther
+	$(MODE) $(PHPUNIT) --group panther
 .PHONY: panther
 
 coverage: ## run PHPUnit with Coverage

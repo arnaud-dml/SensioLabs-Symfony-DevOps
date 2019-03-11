@@ -2,11 +2,11 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Component\Panther\PantherTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\Common\AuthClientTrait;
 use App\Entity\Gardener;
 
-class HomepageControllerTest extends PantherTestCase
+class HomepageControllerTest extends WebTestCase
 {
     use AuthClientTrait;
 
