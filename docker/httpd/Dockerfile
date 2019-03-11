@@ -1,8 +1,7 @@
 FROM httpd:latest
 
 RUN apt-get -y update \
-    && apt-get -y upgrade \
-    && apt-get install -y unzip
+    && apt-get -y upgrade
 
 COPY ./conf/default.conf /usr/local/apache2/conf/default.conf
 

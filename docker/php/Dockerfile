@@ -2,10 +2,12 @@ FROM php:7.3-fpm
 
 RUN apt-get -y update \
     && apt-get -y upgrade \
-    && apt-get install -y libicu-dev libzip-dev \
+    && apt-get install -y libicu-dev libzip-dev zlib1g-dev chromium \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
     && docker-php-ext-install pdo_mysql intl opcache zip
+
+ENV PANTHER_NO_SANDBOX 1
 
 # Xdebug
 # > https://github.com/prooph/docker-files
