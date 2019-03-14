@@ -1,11 +1,11 @@
 ifdef DOCKER
-PREFIX = docker exec -ti oai_php
+TARGET_DOCKER_CONTAINER = docker exec -ti oai_php
 endif
-SYMFONY = $(PREFIX) php bin/console
-PHPUNIT = $(PREFIX) php bin/phpunit
-VENDOR 	= $(PREFIX) ./vendor/bin
-LOG 	= $(PREFIX) ./var/log
-CACHE 	= $(PREFIX) ./var/cache
+SYMFONY = $(TARGET_DOCKER_CONTAINER) php bin/console
+PHPUNIT = $(TARGET_DOCKER_CONTAINER) php bin/phpunit
+VENDOR 	= $(TARGET_DOCKER_CONTAINER) ./vendor/bin
+LOG 	= ./var/log
+CACHE 	= ./var/cache
 
 ## 
 ## Bases
