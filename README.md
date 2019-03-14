@@ -9,19 +9,17 @@ The MIT Media Lab Open Agriculture Initiative builds open resources to enable a 
 
 ## Install
 
-Use [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) to start the project:
+- Require [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)
+- Just run `make docker_start` to start the project
+- The first time, wait for the database server to be installed and run `make db DOCKER=1`
+- To see all available commands, run `make` or checked the `Makefile`
 
-- Start server: `docker-compose up -d`  
-- Create database: `docker exec -ti oai_php php bin/console d:d:c --if-not-exists`  
-- Build schema database: `docker exec -ti oai_php php bin/console d:s:u --force`  
-- Load fixures: `docker exec -ti oai_php php bin/console d:f:l --append`  
-- Stop server: `docker-compose down`  
-
-Local URL:
-> [http://localhost:8080/](http://localhost:8080/) = Front Office  
-> [http://localhost:8181/](http://localhost:8181/) = Database Managment System  
-
-Test Account:
+> **Account:**  
 > `user: johndoe`  
 > `pass: johndoe`  
 > `mail: johndoe@gmail.com`  
+
+## Domain
+
+> [http://localhost:8080/](http://localhost:8080/) = Front Office  
+> [http://localhost:8181/](http://localhost:8181/) = Database Managment System  
