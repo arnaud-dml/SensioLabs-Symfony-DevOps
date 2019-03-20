@@ -2,12 +2,13 @@
 
 namespace App\Tests\Gardener;
 
+use App\Entity\Gardener;
+use App\Gardener\GardenerManager;
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use App\Gardener\GardenerManager;
-use App\Entity\Gardener;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class GardenerManagerTest extends TestCase
 {
@@ -17,6 +18,11 @@ class GardenerManagerTest extends TestCase
     private $entityManager;
 
     /**
+     * @var  MockObject|UserPasswordEncoderInterface
+     */
+    protected $passwordEncoder;
+
+    /**
      * @var GardenerManager
      */
     private $manager;
@@ -24,7 +30,8 @@ class GardenerManagerTest extends TestCase
     protected function setUp()
     {
         $this->entityManager = $this->createMock(ObjectManager::class);
-        $this->manager = new GardenerManager($this->entityManager);
+        $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
+        $this->manager = new GardenerManager($this->entityManager, $this->passwordEncoder);
     }
 
     public function testCreate()

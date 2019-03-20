@@ -16,9 +16,9 @@
         "npm": "^6.9.0"
     },
     "devDependencies": {
-        "@fortawesome/fontawesome-free": "^5.7.1",
+        "@fortawesome/fontawesome-free": "^5.8.0",
         "@symfony/webpack-encore": "^0.22.4",
-        "admin-lte": "^2.4.9",
+        "admin-lte": "^2.4.10",
         "bootstrap": "^4.3.1",
         "jquery": "^3.3.1",
         "node-sass": "^4.11.0",

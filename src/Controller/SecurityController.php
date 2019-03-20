@@ -2,20 +2,17 @@
 
 namespace App\Controller;
 
-use App\Common\AuthUserTrait;
 use App\Entity\Gardener;
-use App\Gardener\GardenerRegisterType;
+use App\Security\Form\RegisterType;
+use App\Security\Handler\RegisterHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    use AuthUserTrait;
-
     /**
      * @Route("/login", name="login")
      */
@@ -35,20 +32,11 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function register(Request $request, RegisterHandler $registerHandler): Response
     {
-        $gardener = new Gardener();
-        $form = $this->createForm(GardenerRegisterType::class, $gardener);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordEncoder->encodePassword($gardener, $gardener->getPlainPassword());
-            $gardener->setPassword($password);
-            $gardener->addRole('ROLE_USER');
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($gardener);
-            $entityManager->flush();
-            $this->authUser($gardener);
-            return $this->redirectToRoute('homepage');
+        $form = $this->createForm(RegisterType::class);
+        if ($registerHandler->handle($form, $request)) {
+            return $this->redirectToRoute('login');
         }
         return $this->render("security/register.html.twig", [
             'form' => $form->createView()
