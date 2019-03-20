@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/julienvolle/SensioLabs-OpenAG.svg?branch=master)](https://travis-ci.org/julienvolle/SensioLabs-OpenAG)
-[![Coverage](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG/branch/master/graph/badge.svg)](https://codecov.io/gh/julienvolle/SensioLabs-OpenAG)
+[![Build Status](https://travis-ci.org/julienvolle/SensioLabs-Symfony-DevOps.svg?branch=master)](https://travis-ci.org/julienvolle/SensioLabs-Symfony-DevOps)
+[![Coverage](https://codecov.io/gh/julienvolle/SensioLabs-Symfony-DevOps/branch/master/graph/badge.svg)](https://codecov.io/gh/julienvolle/SensioLabs-Symfony-DevOps)
 
 # Open Agriculture Initiative
 
