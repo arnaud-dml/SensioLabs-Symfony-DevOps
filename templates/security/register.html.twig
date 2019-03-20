@@ -1,0 +1,42 @@
+{% extends 'security/layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Subscribe{% endblock %}
+
+{% block content %}
+<h3 class="display-1 mb-3">Subscribe</h3>
+{{ form_start(form) }}
+    {{ form_row(form._token) }}
+    <div class="form-group mb-2">
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend d-none d-sm-block">
+                <div class="input-group-text" style="width:120px;"><i class="fas fa-user mr-2"></i> Username</div>
+            </div>
+            {{ form_widget(form.username, { 'attr': { 'placeholder': 'Username', 'required': true, 'autofocus': true } }) }}
+        </div>
+    </div>
+    <div class="form-group mb-2">
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend d-none d-sm-block">
+                <div class="input-group-text" style="width:120px;"><i class="fas fa-at mr-2"></i> Email</div>
+            </div>
+            {{ form_widget(form.email, { 'attr': { 'placeholder': 'Email', 'required': true } }) }}
+        </div>
+    </div>
+    <div class="form-group mb-3">
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend d-none d-sm-block">
+                <div class="input-group-text" style="width:120px;"><i class="fas fa-unlock-alt mr-2"></i> Password</div>
+            </div>
+            {{ form_widget(form.plainPassword.first, { 'attr': { 'placeholder': 'Password', 'required': true } }) }}
+            {{ form_widget(form.plainPassword.second, { 'attr': { 'placeholder': 'Repeat', 'required': true } }) }}
+        </div>
+    </div>
+    <div class="form-group mb-1 text-xs-left text-sm-right">
+        {{ form_widget(form.submit, { 'label': 'Submit', 'attr': { 'class': 'btn-dark' } }) }}
+    </div>
+    <div class="form-group mb-0 text-xs-left text-sm-right">
+        <small class="text-muted"><a href="{{ path('login') }}" class="text-muted">Back to authenticate</a></small>
+    </div>
+    {{ form_errors(form) }}
+{{ form_end(form) }}
+{% endblock %}

@@ -1,12 +1,11 @@
-// BOOTSTRAP
 @import "~bootstrap/scss/bootstrap";
 
-// STYLESHEET
 body {
     background-image: url('../../img/security/background.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     background-color: white;
 
     section {
@@ -31,7 +30,7 @@ body {
             max-width: 1000px;
         }
 
-        #auth {
+        #content {
             width: 100%;
             max-width: 400px;
             background-color: #eee !important;
@@ -40,11 +39,11 @@ body {
             input, button {
                 border-radius: 0;
             }
-
+        
             label[for=remember_me] {
                 cursor: pointer;
             }
-
+        
             .custom-control-input:checked ~ .custom-control-label::before {
                 border-color: #23272b;
                 background-color: #23272b;

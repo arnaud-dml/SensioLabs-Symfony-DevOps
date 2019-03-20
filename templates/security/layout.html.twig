@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block html_attributs %}{{ parent() }} class="h-100"{% endblock %}
+{% block body_attributs %} class="d-flex flex-column h-100"{% endblock %}
+
+{% block stylesheets %}{{ encore_entry_link_tags('css/security/layout') }}{% endblock %}
+
+{% block body %}
+<section class="m-auto p-4">
+
+    <div id="header" class="p-0 pb-5 mx-auto">
+        <h1 class="display-1 text-white text-center">Open Agriculture Initiative</h1>
+        <h2 class="display-1 text-white text-center px-0 px-sm-5">The MIT Media Lab &laquo;&nbsp;Open Agriculture Initiative&nbsp;&raquo; builds open resources to enable a global community to accelerate digital agricultural innovation.</h2>
+    </div>
+    
+    <div id="content" class="px-4 pt-3 pb-4 mx-auto shadow">
+        {% block content %}{% endblock %}
+    </div>
+
+<section>
+{% endblock %}
+
+{% block javascripts %}{{ encore_entry_script_tags('js/security/layout') }}{% endblock %}

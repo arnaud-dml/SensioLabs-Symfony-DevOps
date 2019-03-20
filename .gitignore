@@ -23,7 +23,7 @@
 ###< squizlabs/php_codesniffer ###
 
 ###> docker ###
-/docker/mysql/var/
+/docker-volumes/
 ###< docker ###
 
 ###> notes ###
