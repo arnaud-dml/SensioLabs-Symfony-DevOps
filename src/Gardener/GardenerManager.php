@@ -36,8 +36,8 @@ class GardenerManager
     public function createFromArray(array $data): Gardener
     {
         if (empty($data) || (
-            empty($data['username']) && 
-            empty($data['email']) && 
+            empty($data['username']) &&
+            empty($data['email']) &&
             empty($data['plainPassword'])
         )) {
             throw new MissingOptionsException();
@@ -54,7 +54,7 @@ class GardenerManager
 
     /**
      * @param Gardener $gardener
-     * 
+     *
      * @return Gardener
      */
     public function create(Gardener $gardener): Gardener

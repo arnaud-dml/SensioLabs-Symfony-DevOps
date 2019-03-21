@@ -29,7 +29,7 @@ class RegisterHandler
     public function handle(FormInterface $form, Request $request): bool
     {
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->gardenerManager->create($form->getData());
             return true;
         }
