@@ -22,5 +22,6 @@ The MIT Media Lab Open Agriculture Initiative builds open resources to enable a 
 
 ## Domain
 
-> [http://localhost:8080/](http://localhost:8080/) = Front Office  
-> [http://localhost:8181/](http://localhost:8181/) = Database Managment System  
+> [http://localhost:8080/](http://localhost:8080/) = Frontend  
+> [http://localhost:8181/](http://localhost:8181/) = Database Managment System (PHPMyAdmin)  
+> [http://localhost:1025/](http://localhost:1080/) = Mailer Client (MailDev)  

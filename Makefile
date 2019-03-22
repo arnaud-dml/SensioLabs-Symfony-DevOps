@@ -44,8 +44,8 @@ docker_start:
 	@echo "-------------------------"
 	@echo "Let's go!"
 	@echo "-> http://localhost:8080/ (Frontend)"
-	@echo "-> http://localhost:8181/ (PHPMyAdmin)"
-	@echo "-> http://localhost:1080/ (MailDev)"
+	@echo "-> http://localhost:8181/ (Database Managment System)"
+	@echo "-> http://localhost:1080/ (Mailer Client)"
 	@echo "-------------------------"
 .PHONY: docker_start
 
