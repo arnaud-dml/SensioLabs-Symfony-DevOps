@@ -65,7 +65,7 @@ class GardenerManager
     {
         if ($gardener->getPlainPassword()) {
             $password = $this->passwordEncoder->encodePassword(
-                $gardener, 
+                $gardener,
                 $gardener->getPlainPassword()
             );
             $gardener->setPassword($password);

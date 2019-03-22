@@ -48,7 +48,7 @@ class TokenManager
     {
         if (empty($data) || (
             empty($data['gardener']) &&
-            empty($data['type']) 
+            empty($data['type'])
         )) {
             throw new MissingOptionsException();
         }

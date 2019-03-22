@@ -14,7 +14,8 @@ The MIT Media Lab Open Agriculture Initiative builds open resources to enable a 
 - The first time, wait for the database server to be installed and run `make db DOCKER=1`
 - To see all available commands, run `make` or checked the `Makefile`
 
-> **Account:**  
+> **Fixture Test Account:**  
+> Juste run `make dfl DOCKER=1` and used:  
 > `user: johndoe`  
 > `pass: johndoe`  
 > `mail: johndoe@gmail.com`  

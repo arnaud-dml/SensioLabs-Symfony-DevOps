@@ -27,8 +27,8 @@ class Gardener implements UserInterface, \Serializable
     
     /**
      * @ORM\OneToMany(
-     *      targetEntity="App\Entity\Token", 
-     *      orphanRemoval=true, 
+     *      targetEntity="App\Entity\Token",
+     *      orphanRemoval=true,
      *      mappedBy="user"
      * )
      */
