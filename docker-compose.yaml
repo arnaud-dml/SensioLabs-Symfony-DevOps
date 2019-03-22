@@ -55,5 +55,15 @@ services:
         networks:
             - backend
 
+    mail:
+        container_name: oai_mail
+        image: djfarrelly/maildev
+        restart: always
+        ports:
+            - 1080:80
+            - 1025:25
+        networks:
+            - backend
+
 networks:
     backend:

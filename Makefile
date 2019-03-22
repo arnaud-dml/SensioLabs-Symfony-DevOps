@@ -43,8 +43,9 @@ docker_start:
 	docker-compose up -d --build
 	@echo "-------------------------"
 	@echo "Let's go!"
-	@echo "-> http://localhost:8080/"
-	@echo "-> http://localhost:8181/"
+	@echo "-> http://localhost:8080/ (Frontend)"
+	@echo "-> http://localhost:8181/ (PHPMyAdmin)"
+	@echo "-> http://localhost:1080/ (MailDev)"
 	@echo "-------------------------"
 .PHONY: docker_start
 
