@@ -43,10 +43,16 @@ class GardenerManagerTest extends TestCase
         $this->entityManager
             ->expects(self::once())
             ->method('flush');
+        
+        $this->passwordEncoder
+            ->expects(self::once())
+            ->method('encodePassword')
+            ->willReturn('$2y$13$yFTtt40t7456iSPY7bx9euJmz924Um15WRIo6Fg6T8je5cdJYkad.');
 
         $gardener = $this->manager->createFromArray([
             'username' => 'John Doe',
             'email' => 'john-doe@gmail.com',
+            'plainPassword' => 'johndoe',
         ]);
 
         self::assertInstanceOf(Gardener::class, $gardener);

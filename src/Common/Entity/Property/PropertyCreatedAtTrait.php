@@ -33,7 +33,7 @@ trait PropertyCreatedAtTrait
     /**
      * @ORM\PrePersist
      */
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->setCreatedAt(new \DateTime());
     }

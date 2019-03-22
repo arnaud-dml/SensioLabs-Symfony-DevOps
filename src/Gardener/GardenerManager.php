@@ -2,6 +2,7 @@
 
 namespace App\Gardener;
 
+use App\Common\Helper\LoggerTrait;
 use App\Entity\Gardener;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
@@ -9,6 +10,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class GardenerManager
 {
+    use LoggerTrait;
+
     /**
      * @var ObjectManager
      */
@@ -30,7 +33,7 @@ class GardenerManager
 
     /**
      * @param array $data
-     *
+     * @throws MissingOptionsException
      * @return Gardener
      */
     public function createFromArray(array $data): Gardener
@@ -45,24 +48,60 @@ class GardenerManager
         $gardener = new Gardener();
         $gardener->setUsername($data['username']);
         $gardener->setEmail($data['email']);
+        $gardener->setPlainPassword($data['plainPassword']);
         $gardener->addRole('ROLE_USER');
-        $this->entityManager->persist($gardener);
-        $this->entityManager->flush();
-
+        $gardener->setEnabled(false);
+        $this->encodePassword($gardener);
+        $this->save($gardener);
         return $gardener;
     }
 
     /**
      * @param Gardener $gardener
-     *
+     * @throws MissingOptionsException
      * @return Gardener
      */
-    public function create(Gardener $gardener): Gardener
+    public function encodePassword(Gardener $gardener): Gardener
     {
-        $gardener->setPassword($this->passwordEncoder->encodePassword($gardener, $gardener->getPlainPassword()));
-        $gardener->setRoles(['ROLE_USER']);
-        $this->entityManager->persist($gardener);
-        $this->entityManager->flush();
+        if ($gardener->getPlainPassword()) {
+            $password = $this->passwordEncoder->encodePassword(
+                $gardener, 
+                $gardener->getPlainPassword()
+            );
+            $gardener->setPassword($password);
+        } else {
+            throw new MissingOptionsException();
+        }
         return $gardener;
+    }
+
+    /**
+     * @param Gardener $gardener
+     * @return Gardener
+     */
+    public function register(Gardener $gardener): Gardener
+    {
+        $data = [];
+        $data['username'] = $gardener->getUsername();
+        $data['email'] = $gardener->getEmail();
+        $data['plainPassword'] = $gardener->getPlainPassword();
+        return $this->createFromArray($data);
+    }
+
+    /**
+     * @param Gardener $gardener
+     * @throws ORMException
+     * @return bool
+     */
+    public function save(Gardener $gardener): bool
+    {
+        try {
+            $this->entityManager->persist($gardener);
+        } catch (ORMException $e) {
+            $this->logError($e->getMessage());
+            return false;
+        }
+        $this->entityManager->flush();
+        return true;
     }
 }

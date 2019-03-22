@@ -6,16 +6,34 @@ use App\Common\Entity\EntityUserTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GardenerRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ *      fields="email",
+ *      message="This email has already been registered"
+ * )
+ * @UniqueEntity(
+ *      fields="username",
+ *      message="This username has already been registered"
+ * )
  */
 class Gardener implements UserInterface, \Serializable
 {
     use EntityUserTrait;
     
+    /**
+     * @ORM\OneToMany(
+     *      targetEntity="App\Entity\Token", 
+     *      orphanRemoval=true, 
+     *      mappedBy="user"
+     * )
+     */
+    private $tokens;
+
     /**
      * @ORM\OneToMany(
      *      targetEntity="App\Entity\Pot",
@@ -39,8 +57,45 @@ class Gardener implements UserInterface, \Serializable
      */
     public function __construct()
     {
+        $this->tokens = new ArrayCollection();
         $this->pots = new ArrayCollection();
         $this->recipes = new ArrayCollection();
+    }
+
+    /**
+     * @param Token $pot
+     * @return Gardener
+     */
+    public function addToken(Token $token): self
+    {
+        if (!$this->tokens->contains($token)) {
+            $this->tokens[] = $token;
+            $token->setGardener($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Token $pot
+     * @return Gardener
+     */
+    public function removeToken(Token $token): self
+    {
+        if ($this->tokens->contains($token)) {
+            $this->tokens->removeElement($token);
+            if ($token->getGardener() === $this) {
+                $token->setGardener(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Application[]
+     */
+    public function getTokens(): Collection
+    {
+        return $this->tokens;
     }
 
     /**
