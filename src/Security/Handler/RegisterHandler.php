@@ -40,7 +40,7 @@ class RegisterHandler
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $gardener = $this->gardenerManager->register($form->getData());
-                $token = $this->tokenManager->register($gardener);
+                $this->tokenManager->register($gardener);
             } catch (Exception $e) {
                 $this->logError($e->getMessage());
                 return false;
