@@ -3,9 +3,9 @@
     <div class="form-group mb-2">
         <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend d-none d-sm-block">
-                <div class="input-group-text" style="width:120px;"><i class="fas fa-user mr-2"></i> Username</div>
+                <div class="input-group-text" style="width:120px;"><i class="fas fa-user mr-2"></i> Login</div>
             </div>
-            <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+            <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-control" placeholder="Your username or email" required autofocus>
         </div>
     </div>
     <div class="form-group m-0">
@@ -13,7 +13,7 @@
             <div class="input-group-prepend d-none d-sm-block">
                 <div class="input-group-text" style="width:120px;"><i class="fas fa-unlock-alt mr-2"></i> Password</div>
             </div>
-            <input type="password" name="_password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="password" name="_password" id="inputPassword" class="form-control" placeholder="Your password" required>
         </div>
     </div>
     {% if error %}
@@ -35,6 +35,6 @@
         </div>
     </div>
     <div class="form-group mb-0 text-xs-left text-sm-right">
-        <small class="text-muted"><a href="{{ path('register') }}" class="text-muted">Register</a> | <a href="{{ path('lost') }}" class="text-muted">Lost password</a></small>
+        <small class="text-muted"><a href="{{ path('register') }}" class="text-muted">Register</a> | <a href="{{ path('lost_password') }}" class="text-muted">Lost password</a></small>
     </div>
 </form>

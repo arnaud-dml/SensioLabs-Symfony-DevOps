@@ -53,11 +53,8 @@
 
     <div class="form-group mb-1 text-xs-left text-sm-right">
         {{ form_errors(form) }}
+        <a href="{{ path('login') }}" class="btn btn-secondary">Back</a>
         {{ form_widget(form.submit, { 'label': 'Submit', 'attr': { 'class': 'btn-dark' } }) }}
-    </div>
-
-    <div class="form-group mb-0 text-xs-left text-sm-right">
-        <small class="text-muted"><a href="{{ path('login') }}" class="text-muted">Back to authenticate</a></small>
     </div>
     
 {{ form_end(form) }}

@@ -18,4 +18,19 @@ class GardenerRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Gardener::class);
     }
+
+    /**
+     * @param string $login
+     * @return Gardener|null
+     */
+    public function findOneByUsernameOrEmail(string $login): ?Gardener
+    {
+        return $this->createQueryBuilder('g')
+            ->where('g.username = :username OR g.email = :email')
+            ->setParameter('username', $login)
+            ->setParameter('email', $login)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }
