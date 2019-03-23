@@ -23,17 +23,17 @@ security:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
-                path: logout
-                target: login
+                path: security_logout
+                target: security_login
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/activate, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/signin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/signup, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/account-activation, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/lost-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/reset-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }

@@ -22,6 +22,7 @@ trait EntityUserTrait
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotNull
+     * @Assert\Length(min=5)
      * @var string
      */
     private $username;

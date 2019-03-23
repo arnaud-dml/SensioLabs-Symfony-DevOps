@@ -52,16 +52,20 @@ class ResetPasswordHandler
      */
     public function handle(FormInterface $form, Request $request, string $token)
     {
+        $token = $this->tokenRepository->findOneBy([
+            'token' => $token,
+            'type' => TokenManager::TOKEN_TYPE_LOST_PASSWORD
+        ]);
+        if ($token === null) {
+            $form->addError(new FormError("Unknown account"));
+            return false;
+        }
+        if ($token->isExpired()) {
+            $form->addError(new FormError("This link has expired"));
+            return false;
+        }
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $token = $this->tokenRepository->findOneBy([
-                'token' => $token,
-                'type' => TokenManager::TOKEN_TYPE_LOST_PASSWORD
-            ]);
-            if ($token === null) {
-                $form->addError(new FormError("Unknow gardener"));
-                return false;
-            }
             $this->gardenerManager->encodePassword(
                 $token
                     ->getGardener()
@@ -74,6 +78,7 @@ class ResetPasswordHandler
                 $this->tokenManager->delete($token);
             } catch (Exception $e) {
                 $this->logError($e->getMessage());
+                $form->addError(new FormError('Sorry, we encountered an error'));
                 return false;
             }
             return true;

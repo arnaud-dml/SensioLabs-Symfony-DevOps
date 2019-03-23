@@ -23,7 +23,7 @@ class HomepageControllerTest extends WebTestCase
         self::assertEquals(302, $this->client->getResponse()->getStatusCode());
 
         $location = $this->client->getResponse()->headers->get('location');
-        $route = $this->client->getContainer()->get('router')->generate('login');
+        $route = $this->client->getContainer()->get('router')->generate('security_login');
         self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
 
         $this->authClient($this->client);

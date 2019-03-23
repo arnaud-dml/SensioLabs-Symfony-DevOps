@@ -16,10 +16,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * @Route(
+ *      name="security_"
+ * )
+ */
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/signin", name="login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -35,20 +40,21 @@ class SecurityController extends AbstractController
     }
     
     /**
-     * @Route("/logout", name="logout")
+     * @Route("/signout", name="logout")
      */
     public function logout()
     {
     }
 
     /**
-     * @Route("/register", name="register")
+     * @Route("/signup", name="register")
      */
     public function register(Request $request, RegisterHandler $registerHandler): Response
     {
         $form = $this->createForm(RegisterType::class);
         if ($registerHandler->handle($form, $request)) {
-            return $this->redirectToRoute('login');
+            $this->addFlash('success', 'You registered! Check your email to activate your account');
+            return $this->redirectToRoute('security_login');
         }
         return $this->render('security/register.html.twig', [
             'form' => $form->createView()
@@ -56,12 +62,13 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/activate/{token}", name="activate")
+     * @Route("/account-activation/{token}", name="account_activation")
      */
-    public function activate(ActivateHandler $handler, string $token): Response
+    public function accountActivation(ActivateHandler $handler, string $token): Response
     {
         if ($handler->handle($token)) {
-            return $this->redirectToRoute('login');
+            $this->addFlash('success', 'Your account is activate');
+            return $this->redirectToRoute('security_login');
         }
         return $this->redirectToRoute('homepage');
     }
@@ -73,7 +80,8 @@ class SecurityController extends AbstractController
     {
         $form = $this->createForm(LostPasswordType::class);
         if ($handler->handle($form, $request)) {
-            return $this->redirectToRoute('homepage');
+            $this->addFlash('success', 'An email has been sent to you to reset your password');
+            return $this->redirectToRoute('security_login');
         }
         return $this->render('security/lost_password.html.twig', [
             'form' => $form->createView()
@@ -87,7 +95,8 @@ class SecurityController extends AbstractController
     {
         $form = $this->createForm(ResetPasswordType::class);
         if ($handler->handle($form, $request, $token)) {
-            return $this->redirectToRoute('login');
+            $this->addFlash('success', 'Your password has been reset');
+            return $this->redirectToRoute('security_login');
         }
         return $this->render('security/reset_password.html.twig', [
             'form' => $form->createView(),

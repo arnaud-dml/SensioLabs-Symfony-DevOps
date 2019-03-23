@@ -53,16 +53,17 @@ class LostPasswordHandler
     {
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $gardener = $this->gardenerRepository->findOneByUsernameOrEmail($form->getData()['username']);
+            $gardener = $this->gardenerRepository->findOneByUsernameOrEmail($form->getData()['login']);
             if ($gardener === null) {
-                $form->addError(new FormError('Unknow gardener'));
+                $form->addError(new FormError('Unknown account'));
                 return false;
             }
             try {
-                $token = $this->tokenManager->lostPassword($gardener);
-                $this->mailerHelper->lostPassword($token);
+                $token = $this->tokenManager->createLostPasswordToken($gardener);
+                $this->mailerHelper->sendLostPasswordMail($token);
             } catch (Exception $e) {
                 $this->logError($e->getMessage());
+                $form->addError(new FormError('Sorry, we encountered an error'));
                 return false;
             }
             return true;

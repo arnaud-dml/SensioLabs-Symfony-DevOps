@@ -50,10 +50,11 @@ class RegisterHandler
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $gardener = $this->gardenerManager->register($form->getData());
-                $token = $this->tokenManager->register($gardener);
-                $this->mailerHelper->register($token);
+                $token = $this->tokenManager->createRegisterToken($gardener);
+                $this->mailerHelper->sendRegisterMail($token);
             } catch (Exception $e) {
                 $this->logError($e->getMessage());
+                $form->addError(new FormError('Sorry, we encountered an error'));
                 return false;
             }
             return true;

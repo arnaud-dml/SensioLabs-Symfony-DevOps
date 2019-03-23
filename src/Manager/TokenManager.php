@@ -67,7 +67,7 @@ class TokenManager
      * @param Gardener $gardener
      * @return Token
      */
-    public function register(Gardener $gardener): Token
+    public function createRegisterToken(Gardener $gardener): Token
     {
         $data = [];
         $data['gardener'] = $gardener;
@@ -80,7 +80,7 @@ class TokenManager
      * @param Gardener $gardener
      * @return Token
      */
-    public function lostPassword(Gardener $gardener): Token
+    public function createLostPasswordToken(Gardener $gardener): Token
     {
         $data = [];
         $data['gardener'] = $gardener;

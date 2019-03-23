@@ -6,6 +6,10 @@
 
     <h3 class="display-1 mb-3">Authenticate</h3>
 
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
     {% include 'security/form/login.html.twig' %}
 
 {% endblock %}

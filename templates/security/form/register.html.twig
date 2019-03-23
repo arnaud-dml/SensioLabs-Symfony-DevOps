@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="form-group mb-3">
+    <div class="form-group mb-2">
         <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend d-none d-sm-block">
                 <div class="input-group-text" style="width:120px;"><i class="fas fa-unlock-alt mr-2"></i> Password</div>
@@ -51,9 +51,9 @@
         </div>
     </div>
 
-    <div class="form-group mb-1 text-xs-left text-sm-right">
+    <div class="form-group mt-4 mb-1 text-xs-left text-sm-right">
         {{ form_errors(form) }}
-        <a href="{{ path('login') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ path('security_login') }}" class="btn btn-secondary">Back</a>
         {{ form_widget(form.submit, { 'label': 'Submit', 'attr': { 'class': 'btn-dark' } }) }}
     </div>
     

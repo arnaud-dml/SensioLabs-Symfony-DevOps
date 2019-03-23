@@ -12,7 +12,7 @@ class SecurityControllerPantherTest extends PantherTestCase
     public function testAuth()
     {
         $client = static::createPantherClient();
-        $crawler = $client->request('GET', '/login');
+        $crawler = $client->request('GET', '/signin');
         self::assertCount(1, $crawler->filter('form'));
         self::assertCount(1, $crawler->filter('input[name=_username]'));
         self::assertCount(1, $crawler->filter('input[name=_password]'));

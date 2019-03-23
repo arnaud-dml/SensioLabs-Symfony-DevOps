@@ -18,7 +18,7 @@ class SecurityControllerTest extends WebTestCase
 
     public function testRouteLogin()
     {
-        $crawler = $this->client->request('GET', '/login');
+        $crawler = $this->client->request('GET', '/signin');
         self::assertEquals(200, $this->client->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('form'));
         self::assertCount(1, $crawler->filter('input[name=_username]'));
@@ -30,7 +30,7 @@ class SecurityControllerTest extends WebTestCase
 
     public function testLoginSuccess()
     {
-        $crawler = $this->client->request('GET', '/login');
+        $crawler = $this->client->request('GET', '/signin');
         $form = $crawler->selectButton('submit')->form([
             '_username' => 'johndoe',
             '_password' => 'johndoe'
@@ -47,7 +47,7 @@ class SecurityControllerTest extends WebTestCase
     public function testLoginAlready()
     {
         $this->authClient($this->client);
-        $this->client->request('GET', '/login');
+        $this->client->request('GET', '/signin');
         self::assertEquals(302, $this->client->getResponse()->getStatusCode());
 
         $location = $this->client->getResponse()->headers->get('location');
@@ -57,7 +57,7 @@ class SecurityControllerTest extends WebTestCase
 
     public function testLoginErrorUsername()
     {
-        $crawler = $this->client->request('GET', '/login');
+        $crawler = $this->client->request('GET', '/signin');
         $form = $crawler->selectButton('submit')->form([
             '_username' => 'unknown',
             '_password' => ''
@@ -67,13 +67,13 @@ class SecurityControllerTest extends WebTestCase
         self::assertEquals(302, $this->client->getResponse()->getStatusCode());
 
         $location = $this->client->getResponse()->headers->get('location');
-        $route = $this->client->getContainer()->get('router')->generate('login');
+        $route = $this->client->getContainer()->get('router')->generate('security_login');
         self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
     }
 
     public function testLoginErrorPassword()
     {
-        $crawler = $this->client->request('GET', '/login');
+        $crawler = $this->client->request('GET', '/signin');
         $form = $crawler->selectButton('submit')->form([
             '_username' => 'johndoe',
             '_password' => ''
@@ -83,13 +83,13 @@ class SecurityControllerTest extends WebTestCase
         self::assertEquals(302, $this->client->getResponse()->getStatusCode());
 
         $location = $this->client->getResponse()->headers->get('location');
-        $route = $this->client->getContainer()->get('router')->generate('login');
+        $route = $this->client->getContainer()->get('router')->generate('security_login');
         self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
     }
 
     public function testLoginErrorCSRF()
     {
-        $crawler = $this->client->request('GET', '/login');
+        $crawler = $this->client->request('GET', '/signin');
         $form = $crawler->selectButton('submit')->form([
             '_username' => 'johndoe',
             '_password' => 'johndoe'
@@ -100,7 +100,7 @@ class SecurityControllerTest extends WebTestCase
         self::assertEquals(302, $this->client->getResponse()->getStatusCode());
 
         $location = $this->client->getResponse()->headers->get('location');
-        $route = $this->client->getContainer()->get('router')->generate('login');
+        $route = $this->client->getContainer()->get('router')->generate('security_login');
         self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
     }
 
