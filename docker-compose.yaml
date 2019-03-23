@@ -35,7 +35,7 @@ services:
         command: --default-authentication-plugin=mysql_native_password
         restart: always
         ports:
-            - 33066:3306
+            - 3306:3306
         networks:
             - backend
         volumes: 
@@ -55,13 +55,12 @@ services:
         networks:
             - backend
 
-    mail:
-        container_name: oai_mail
+    webmail:
+        container_name: oai_webmail
         image: djfarrelly/maildev
         restart: always
         ports:
             - 1080:80
-            - 1025:25
         networks:
             - backend
 

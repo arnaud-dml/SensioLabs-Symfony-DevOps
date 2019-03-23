@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Gardener;
 use App\Security\Form\RegisterType;
 use App\Security\Handler\RegisterHandler;
+use App\Security\Handler\ActivateHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,6 +29,13 @@ class SecurityController extends AbstractController
             'error' => $error
         ]);
     }
+    
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout()
+    {
+    }
 
     /**
      * @Route("/register", name="register")
@@ -44,10 +52,21 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/reset", name="reset")
+     * @Route("/activate/{token}", name="activate")
      */
-    public function reset(Request $request): Response
+    public function activate(string $token, ActivateHandler $handler): Response
     {
-        return $this->render("security/reset.html.twig");
+        if ($handler->handle($token)) {
+            return $this->redirectToRoute('login');
+        }
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/lost", name="lost")
+     */
+    public function lost(Request $request): Response
+    {
+        return $this->render("security/lost.html.twig");
     }
 }

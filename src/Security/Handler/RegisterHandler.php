@@ -3,6 +3,7 @@
 namespace App\Security\Handler;
 
 use App\Gardener\GardenerManager;
+use App\Helper\MailerHelper;
 use App\Manager\TokenManager;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,14 +19,23 @@ class RegisterHandler
      * @var TokenManager
      */
     private $tokenManager;
+
+    /**
+     * @var MailerHelper
+     */
+    private $mailerHelper;
     
     /**
      * @param GardenerManager $gardenerManager
      */
-    public function __construct(GardenerManager $gardenerManager, TokenManager $tokenManager)
-    {
+    public function __construct(
+        GardenerManager $gardenerManager,
+        TokenManager $tokenManager,
+        MailerHelper $mailerHelper
+    ) {
         $this->gardenerManager = $gardenerManager;
         $this->tokenManager = $tokenManager;
+        $this->mailerHelper = $mailerHelper;
     }
     
     /**
@@ -40,7 +50,8 @@ class RegisterHandler
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $gardener = $this->gardenerManager->register($form->getData());
-                $this->tokenManager->register($gardener);
+                $token = $this->tokenManager->register($gardener);
+                $this->mailerHelper->register($token);
             } catch (Exception $e) {
                 $this->logError($e->getMessage());
                 return false;

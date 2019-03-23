@@ -1,0 +1,40 @@
+<form method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <div class="form-group mb-2">
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend d-none d-sm-block">
+                <div class="input-group-text" style="width:120px;"><i class="fas fa-user mr-2"></i> Username</div>
+            </div>
+            <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        </div>
+    </div>
+    <div class="form-group m-0">
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend d-none d-sm-block">
+                <div class="input-group-text" style="width:120px;"><i class="fas fa-unlock-alt mr-2"></i> Password</div>
+            </div>
+            <input type="password" name="_password" id="inputPassword" class="form-control" placeholder="Password" required>
+        </div>
+    </div>
+    {% if error %}
+    <div class="form-group mb-2">
+        <code class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ error.messageKey|trans(error.messageData, 'security') }}</code>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="custom-control custom-checkbox mb-2">
+                <input type="checkbox" name="_remember_me" class="custom-control-input" id="remember_me">
+                <label class="custom-control-label" for="remember_me">Remember me</label>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group mt-2 mb-1 text-xs-left text-sm-right">
+                <button class="btn btn-dark" type="submit" id="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group mb-0 text-xs-left text-sm-right">
+        <small class="text-muted"><a href="{{ path('register') }}" class="text-muted">Register</a> | <a href="{{ path('lost') }}" class="text-muted">Lost password</a></small>
+    </div>
+</form>

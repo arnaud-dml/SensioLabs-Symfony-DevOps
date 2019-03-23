@@ -26,6 +26,7 @@ class GardenerFixtures extends Fixture
         $gardener->setEmail('johndoe@gmail.com');
         $gardener->setPassword($this->passwordEncoder->encodePassword($gardener, 'johndoe'));
         $gardener->addRole('ROLE_USER');
+        $gardener->setEnabled(true);
         $manager->persist($gardener);
         $manager->flush();
     }

@@ -1,0 +1,11 @@
+{% extends 'security/layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Lost password{% endblock %}
+
+{% block content %}
+
+    <h3 class="display-1 mb-3">Lost password</h3>
+
+    {% include 'security/form/lost.html.twig' %}
+
+{% endblock %}
