@@ -6,6 +6,7 @@ use App\Gardener\GardenerManager;
 use App\Helper\MailerHelper;
 use App\Manager\TokenManager;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class RegisterHandler

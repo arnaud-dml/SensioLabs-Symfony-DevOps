@@ -5,10 +5,10 @@ namespace App\Common\Entity;
 use App\Common\Entity\Property\PropertyCreatedAtTrait;
 use App\Common\Entity\Property\PropertyEnabledTrait;
 use App\Common\Entity\Property\PropertyIdTrait;
+use App\Common\Entity\Property\PropertyLockedTrait;
 use App\Common\Entity\Property\PropertyNameTrait;
 use App\Common\Entity\Property\PropertyUpdatedAtTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait EntityUserTrait
@@ -17,6 +17,7 @@ trait EntityUserTrait
     use PropertyCreatedAtTrait;
     use PropertyUpdatedAtTrait;
     use PropertyEnabledTrait;
+    use PropertyLockedTrait;
     use PropertyNameTrait;
     
     /**
@@ -63,9 +64,9 @@ trait EntityUserTrait
 
     /**
      * @param string $username
-     * @return UserInterface
+     * @return self
      */
-    public function setUsername(string $username): UserInterface
+    public function setUsername(string $username): self
     {
         $this->username = $username;
         return $this;
@@ -81,9 +82,9 @@ trait EntityUserTrait
 
     /**
      * @param string $email
-     * @return UserInterface
+     * @return self
      */
-    public function setEmail(string $email): UserInterface
+    public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
@@ -99,9 +100,9 @@ trait EntityUserTrait
 
     /**
      * @param string $plainPassword
-     * @return UserInterface
+     * @return self
      */
-    public function setPlainPassword(string $plainPassword): UserInterface
+    public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
         return $this;
@@ -117,9 +118,9 @@ trait EntityUserTrait
 
     /**
      * @param string $password
-     * @return UserInterface
+     * @return self
      */
-    public function setPassword(string $password): UserInterface
+    public function setPassword(string $password): self
     {
         $this->password = $password;
         return $this;
@@ -138,9 +139,9 @@ trait EntityUserTrait
 
     /**
      * @param array $roles
-     * @return UserInterface
+     * @return self
      */
-    public function setRoles(array $roles): UserInterface
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
         return $this;
@@ -148,9 +149,9 @@ trait EntityUserTrait
 
     /**
      * @param string $role
-     * @return UserInterface
+     * @return self
      */
-    public function addRole(string $role): UserInterface
+    public function addRole(string $role): self
     {
         if (!in_array($role, $this->roles)) {
             $this->roles[] = $role;
@@ -160,9 +161,9 @@ trait EntityUserTrait
 
     /**
      * @param string $role
-     * @return UserInterface
+     * @return self
      */
-    public function removeRole(string $role): UserInterface
+    public function removeRole(string $role): self
     {
         $roles = $this->getRoles();
         if (($key = array_search($role, $roles)) !== false) {
@@ -201,9 +202,9 @@ trait EntityUserTrait
 
     /**
      * @see \Serializable::unserialize()
-     * @return UserInterface
+     * @return self
      */
-    public function unserialize($serialized): UserInterface
+    public function unserialize($serialized): self
     {
         list (
             $this->id,

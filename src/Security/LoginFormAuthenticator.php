@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Entity\Gardener;
+use App\Entity\Gardener as User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +45,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return 'security_login' === $request->attributes->get('_route')
+        return $request->attributes->get('_route') === 'security_login'
             && $request->isMethod('POST');
     }
 
@@ -60,7 +60,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             Security::LAST_USERNAME,
             $credentials['username']
         );
-
         return $credentials;
     }
 
@@ -70,15 +69,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-
         $user = $this->entityManager
-            ->getRepository(Gardener::class)
-            ->findOneBy(['username' => $credentials['username']]);
-
+            ->getRepository(User::class)
+            ->findOneByUsernameOrEmail($credentials['username']);
         if (!$user) {
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
-
         return $user;
     }
 
@@ -92,7 +88,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-
         return new RedirectResponse($this->urlGenerator->generate('homepage'));
     }
 

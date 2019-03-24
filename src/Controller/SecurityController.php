@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Gardener;
 use App\Security\Form\LostPasswordType;
 use App\Security\Form\RegisterType;
 use App\Security\Form\ResetPasswordType;

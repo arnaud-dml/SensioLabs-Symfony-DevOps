@@ -5,14 +5,14 @@ namespace App\Tests\Security;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use App\Security\GardenerChecker;
+use App\Security\UserChecker;
 use App\Entity\Gardener;
 
-class GardenerCheckerTest extends TestCase
+class UserCheckerTest extends TestCase
 {
     public function testCheckPreAuthInstanceOfGardener()
     {
-        $checker = new GardenerChecker();
+        $checker = new UserChecker();
         self::assertNull($checker->checkPreAuth(new Gardener()));
 
         $this->expectException(AccessDeniedException::class);
@@ -21,7 +21,7 @@ class GardenerCheckerTest extends TestCase
 
     public function testCheckPostAuthInstanceOfGardener()
     {
-        $checker = new GardenerChecker();
+        $checker = new UserChecker();
         self::assertNull($checker->checkPostAuth(new Gardener()));
 
         $this->expectException(AccessDeniedException::class);

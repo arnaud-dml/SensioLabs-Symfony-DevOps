@@ -77,6 +77,26 @@ class GardenerManager
 
     /**
      * @param Gardener $gardener
+     * @param bool $isAuthenticate
+     */
+    public function login(Gardener $gardener, bool $isAuthenticate): void
+    {
+        if ($isAuthenticate) {
+            if ($gardener->getFailures() || $gardener->isLocked()) {
+                $gardener->unlock();
+                $this->save($gardener);
+            }
+        } else {
+            $gardener->incFailures();
+            if ($gardener->getFailures() >= 3) {
+                $gardener->lock(new \DateTime('now +10 min'));
+            }
+            $this->save($gardener);
+        }
+    }
+
+    /**
+     * @param Gardener $gardener
      * @return Gardener
      */
     public function register(Gardener $gardener): Gardener

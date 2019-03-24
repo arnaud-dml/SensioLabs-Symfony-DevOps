@@ -1,5 +1,7 @@
 <form method="post">
+
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
     <div class="form-group mb-2">
         <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend d-none d-sm-block">
@@ -8,6 +10,7 @@
             <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-control" placeholder="Your username or email" required autofocus>
         </div>
     </div>
+
     <div class="form-group m-0">
         <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend d-none d-sm-block">
@@ -16,11 +19,13 @@
             <input type="password" name="_password" id="inputPassword" class="form-control" placeholder="Your password" required>
         </div>
     </div>
+
     {% if error %}
     <div class="form-group mb-2">
         <code class="text-danger"><i class="fas fa-exclamation-triangle"></i> {{ error.messageKey|trans(error.messageData, 'security') }}</code>
     </div>
     {% endif %}
+
     <div class="row">
         <div class="col-xs-12 col-sm-6">
             <div class="custom-control custom-checkbox mb-2">
@@ -34,7 +39,9 @@
             </div>
         </div>
     </div>
+
     <div class="form-group mb-0 text-xs-left text-sm-right">
         <small class="text-muted"><a href="{{ path('security_register') }}" class="text-muted">Signup</a> | <a href="{{ path('security_lost_password') }}" class="text-muted">Lost password</a></small>
     </div>
+
 </form>

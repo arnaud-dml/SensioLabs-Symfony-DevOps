@@ -26,6 +26,11 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     
+    # Authenticate Event Subscriber
+    App\Security\Listener\LoginListener:
+        tags:
+            - { name: event_subscriber }
+
     # Add "Curl" to injectable dependencies
     Curl\Curl:
         autowire: true

@@ -18,7 +18,7 @@ security:
             anonymous: true
             http_basic: true
             provider: main
-            user_checker: App\Security\GardenerChecker
+            user_checker: App\Security\UserChecker
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
