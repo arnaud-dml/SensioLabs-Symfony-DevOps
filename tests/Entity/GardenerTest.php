@@ -6,7 +6,6 @@ use App\Entity\Gardener;
 use App\Entity\Pot;
 use App\Entity\Recipe;
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class GardenerTest extends TestCase

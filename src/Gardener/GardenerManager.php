@@ -23,7 +23,8 @@ class GardenerManager
     protected $passwordEncoder;
 
     /**
-     * @param ObjectManager $entityManager
+     * @param ObjectManager                $entityManager
+     * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(ObjectManager $entityManager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -33,7 +34,9 @@ class GardenerManager
 
     /**
      * @param array $data
+     *
      * @throws MissingOptionsException
+     *
      * @return Gardener
      */
     public function createFromArray(array $data): Gardener
@@ -53,12 +56,15 @@ class GardenerManager
         $gardener->setEnabled(false);
         $this->encodePassword($gardener);
         $this->save($gardener);
+
         return $gardener;
     }
 
     /**
      * @param Gardener $gardener
+     *
      * @throws MissingOptionsException
+     *
      * @return Gardener
      */
     public function encodePassword(Gardener $gardener): Gardener
@@ -72,12 +78,13 @@ class GardenerManager
         } else {
             throw new MissingOptionsException();
         }
+
         return $gardener;
     }
 
     /**
      * @param Gardener $gardener
-     * @param bool $isAuthenticate
+     * @param bool     $isAuthenticate
      */
     public function login(Gardener $gardener, bool $isAuthenticate): void
     {
@@ -97,6 +104,7 @@ class GardenerManager
 
     /**
      * @param Gardener $gardener
+     *
      * @return Gardener
      */
     public function register(Gardener $gardener): Gardener
@@ -105,12 +113,15 @@ class GardenerManager
         $data['username'] = $gardener->getUsername();
         $data['email'] = $gardener->getEmail();
         $data['plainPassword'] = $gardener->getPlainPassword();
+
         return $this->createFromArray($data);
     }
 
     /**
      * @param Gardener $gardener
+     *
      * @throws ORMException
+     *
      * @return bool
      */
     public function save(Gardener $gardener): bool
@@ -119,9 +130,11 @@ class GardenerManager
             $this->entityManager->persist($gardener);
         } catch (ORMException $e) {
             $this->logError($e->getMessage());
+
             return false;
         }
         $this->entityManager->flush();
+
         return true;
     }
 }

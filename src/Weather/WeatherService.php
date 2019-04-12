@@ -32,21 +32,21 @@ class WeatherService
             'uri' => 'https://api.meteomatics.com',
             'time' => $time,
             'query' => 't_2m:C,relative_humidity_2m:p',
-            'location' => $latitude . ',' . $longitude,
-            'format' => $format
+            'location' => $latitude.','.$longitude,
+            'format' => $format,
         ];
         $this->curl->setBasicAuthentication('studdy_laurent', 'KrGbWt7v4N2uT');
-        $response = $this->curl->get(implode('/', $request));
-        if ($response->error === false && $response->curl_error === false && $response->http_error === false) {
-            $data = json_decode($response->response)->data;
+        $response = $this->curl->get(\implode('/', $request));
+        if (false === $response->error && false === $response->curl_error && false === $response->http_error) {
+            $data = \json_decode($response->response)->data;
             $result = [
                 'date' => new \DateTime(),
-                'location' => $request['location']
+                'location' => $request['location'],
             ];
             foreach ($data as $value) {
-                if ($value->parameter == 't_2m:C') {
+                if ('t_2m:C' === $value->parameter) {
                     $result['temperature'] = $value->coordinates[0]->dates[0]->value;
-                } elseif ($value->parameter == 'relative_humidity_2m:p') {
+                } elseif ('relative_humidity_2m:p' === $value->parameter) {
                     $result['humidity'] = $value->coordinates[0]->dates[0]->value;
                 }
             }
@@ -60,6 +60,7 @@ class WeatherService
         if ($response->http_error) {
             throw new HttpException($response->http_error_code, $response->http_error_message);
         }
+
         return $result;
     }
 }

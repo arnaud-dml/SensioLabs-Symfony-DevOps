@@ -7,8 +7,8 @@ use App\Repository\GardenerRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
-use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\SecurityEvents;
 
 class LoginListener implements EventSubscriberInterface
 {
@@ -21,10 +21,10 @@ class LoginListener implements EventSubscriberInterface
      * @var GardenerManager
      */
     private $gardenerManager;
-    
+
     /**
      * @param GardenerRepository $gardenerRepository
-     * @param GardenerManager $gardenerManager
+     * @param GardenerManager    $gardenerManager
      */
     public function __construct(GardenerRepository $gardenerRepository, GardenerManager $gardenerManager)
     {
@@ -34,6 +34,7 @@ class LoginListener implements EventSubscriberInterface
 
     /**
      * @return array
+     *
      * @see https://symfony.com/doc/current/components/security/authentication.html#authentication-events
      */
     public static function getSubscribedEvents(): array
@@ -46,12 +47,11 @@ class LoginListener implements EventSubscriberInterface
 
     /**
      * @param AuthenticationFailureEvent $event
-     * @return void
      */
     public function onAuthenticationFailure(AuthenticationFailureEvent $event): void
     {
         $errorMessage = $event->getAuthenticationException()->getMessage();
-        if (strpos($errorMessage, 'checkCredentials()') !== false) {
+        if (false !== \strpos($errorMessage, 'checkCredentials()')) {
             $username = $event->getAuthenticationToken()->getCredentials()['username'];
             $gardener = $this->gardenerRepository->findOneByUsernameOrEmail($username);
             $this->gardenerManager->login($gardener, false);
@@ -60,7 +60,6 @@ class LoginListener implements EventSubscriberInterface
 
     /**
      * @param InteractiveLoginEvent $event
-     * @return void
      */
     public function onInteractiveLogin(InteractiveLoginEvent $event): void
     {

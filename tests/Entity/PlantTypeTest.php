@@ -2,10 +2,9 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\PlantType;
 use App\Entity\Plant;
+use App\Entity\PlantType;
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class PlantTypeTest extends TestCase

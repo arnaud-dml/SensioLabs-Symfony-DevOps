@@ -2,12 +2,12 @@
 
 namespace App\Tests\Recipe;
 
+use App\Entity\Recipe;
+use App\Recipe\RecipeManager;
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use App\Recipe\RecipeManager;
-use App\Entity\Recipe;
 
 class RecipeManagerTest extends TestCase
 {
@@ -39,7 +39,7 @@ class RecipeManagerTest extends TestCase
 
         $recipe = $this->manager->createFromArray([
             'optimalTemperature' => 22,
-            'optimalHydrometry' => 15
+            'optimalHydrometry' => 15,
         ]);
 
         self::assertInstanceOf(Recipe::class, $recipe);

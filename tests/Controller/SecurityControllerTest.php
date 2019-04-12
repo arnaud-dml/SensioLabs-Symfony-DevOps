@@ -2,8 +2,8 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\Common\AuthClientTrait;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
 {
@@ -33,7 +33,7 @@ class SecurityControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', '/signin');
         $form = $crawler->selectButton('submit')->form([
             '_username' => 'johndoe',
-            '_password' => 'johndoe'
+            '_password' => 'johndoe',
         ]);
         $form['_remember_me']->tick();
         $this->client->submit($form);
@@ -41,7 +41,7 @@ class SecurityControllerTest extends WebTestCase
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('homepage');
-        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
+        self::assertRegExp('/'.\preg_quote($route, '/').'$/', $location);
     }
 
     public function testLoginAlready()
@@ -52,7 +52,7 @@ class SecurityControllerTest extends WebTestCase
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('homepage');
-        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
+        self::assertRegExp('/'.\preg_quote($route, '/').'$/', $location);
     }
 
     public function testLoginErrorUsername()
@@ -60,7 +60,7 @@ class SecurityControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', '/signin');
         $form = $crawler->selectButton('submit')->form([
             '_username' => 'unknown',
-            '_password' => ''
+            '_password' => '',
         ]);
         $form['_remember_me']->tick();
         $this->client->submit($form);
@@ -68,7 +68,7 @@ class SecurityControllerTest extends WebTestCase
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('security_login');
-        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
+        self::assertRegExp('/'.\preg_quote($route, '/').'$/', $location);
     }
 
     public function testLoginErrorPassword()
@@ -76,7 +76,7 @@ class SecurityControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', '/signin');
         $form = $crawler->selectButton('submit')->form([
             '_username' => 'johndoe',
-            '_password' => ''
+            '_password' => '',
         ]);
         $form['_remember_me']->tick();
         $this->client->submit($form);
@@ -84,7 +84,7 @@ class SecurityControllerTest extends WebTestCase
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('security_login');
-        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
+        self::assertRegExp('/'.\preg_quote($route, '/').'$/', $location);
     }
 
     public function testLoginErrorCSRF()
@@ -92,7 +92,7 @@ class SecurityControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', '/signin');
         $form = $crawler->selectButton('submit')->form([
             '_username' => 'johndoe',
-            '_password' => 'johndoe'
+            '_password' => 'johndoe',
         ]);
         $form['_remember_me']->tick();
         $form['_csrf_token'] = '';
@@ -101,7 +101,7 @@ class SecurityControllerTest extends WebTestCase
 
         $location = $this->client->getResponse()->headers->get('location');
         $route = $this->client->getContainer()->get('router')->generate('security_login');
-        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
+        self::assertRegExp('/'.\preg_quote($route, '/').'$/', $location);
     }
 
     public function testLoginRedirect()
@@ -113,12 +113,12 @@ class SecurityControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
         $form = $crawler->selectButton('submit')->form([
             '_username' => 'johndoe',
-            '_password' => 'johndoe'
+            '_password' => 'johndoe',
         ]);
         $this->client->submit($form);
         self::assertEquals(302, $this->client->getResponse()->getStatusCode());
 
         $location = $this->client->getResponse()->headers->get('location');
-        self::assertRegExp("/" . preg_quote($route, "/") . "$/", $location);
+        self::assertRegExp('/'.\preg_quote($route, '/').'$/', $location);
     }
 }

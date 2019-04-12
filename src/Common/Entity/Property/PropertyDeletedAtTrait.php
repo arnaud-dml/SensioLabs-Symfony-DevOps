@@ -8,6 +8,7 @@ trait PropertyDeletedAtTrait
 {
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTimeInterface|null
      */
     private $deletedAt;
@@ -21,12 +22,14 @@ trait PropertyDeletedAtTrait
     }
 
     /**
-     * @param \DateTimeInterface
+     * @param \DateTimeInterface $deletedAt
+     *
      * @return self
      */
     public function setDeletedAt(\DateTimeInterface $deletedAt): self
     {
         $this->deletedAt = $deletedAt;
+
         return $this;
     }
 

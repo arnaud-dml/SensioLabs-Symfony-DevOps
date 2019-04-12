@@ -2,12 +2,12 @@
 
 namespace App\Tests\Pot;
 
+use App\Entity\Pot;
+use App\Pot\PotManager;
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use App\Pot\PotManager;
-use App\Entity\Pot;
 
 class PotManagerTest extends TestCase
 {
@@ -38,7 +38,7 @@ class PotManagerTest extends TestCase
             ->method('flush');
 
         $pot = $this->manager->createFromArray([
-            'location' => 'Montparnasse'
+            'location' => 'Montparnasse',
         ]);
 
         self::assertInstanceOf(Pot::class, $pot);

@@ -7,7 +7,6 @@ use App\Entity\PlantType;
 use App\Entity\Pot;
 use App\Entity\Recipe;
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class PlantTest extends TestCase

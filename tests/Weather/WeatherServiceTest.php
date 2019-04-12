@@ -2,7 +2,6 @@
 
 namespace App\Tests\Weather;
 
-use App\Entity\Weather;
 use App\Weather\WeatherService;
 use Curl\Curl;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -33,15 +32,15 @@ class WeatherServiceTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->willReturn(
-                (object) array(
+                (object) [
                     'error' => false,
                     'curl_error' => false,
                     'http_error' => false,
-                    'response' => '{"data":[{"parameter":"t_2m:C","coordinates":[{"lat":48.8568,' .
-                        '"lon":2.3508,"dates":[{"date":"2019-02-20T22:40:50Z","value":12.7}]}]},' .
-                        '{"parameter":"relative_humidity_2m:p","coordinates":[{"lat":48.8568,' .
-                        '"lon":2.3508,"dates":[{"date":"2019-02-20T22:40:50Z","value":61.1}]}]}]}'
-                )
+                    'response' => '{"data":[{"parameter":"t_2m:C","coordinates":[{"lat":48.8568,'.
+                        '"lon":2.3508,"dates":[{"date":"2019-02-20T22:40:50Z","value":12.7}]}]},'.
+                        '{"parameter":"relative_humidity_2m:p","coordinates":[{"lat":48.8568,'.
+                        '"lon":2.3508,"dates":[{"date":"2019-02-20T22:40:50Z","value":61.1}]}]}]}',
+                ]
             );
         $data = $this->service->getData('48.8568', '2.3508');
         self::assertArrayHasKey('location', $data);
@@ -56,13 +55,13 @@ class WeatherServiceTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->willReturn(
-                (object) array(
+                (object) [
                     'error' => true,
                     'curl_error' => false,
                     'http_error' => false,
                     'error_code' => 401,
-                    'error_message' => 'Unauthorized'
-                )
+                    'error_message' => 'Unauthorized',
+                ]
             );
         $this->expectException(HttpException::class);
         $this->service->getData('48.8568', '2.3508');
@@ -74,13 +73,13 @@ class WeatherServiceTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->willReturn(
-                (object) array(
+                (object) [
                     'error' => false,
                     'curl_error' => true,
                     'http_error' => false,
                     'curl_error_code' => 401,
-                    'curl_error_message' => 'Unauthorized'
-                )
+                    'curl_error_message' => 'Unauthorized',
+                ]
             );
         $this->expectException(HttpException::class);
         $this->service->getData('48.8568', '2.3508');
@@ -92,13 +91,13 @@ class WeatherServiceTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->willReturn(
-                (object) array(
+                (object) [
                     'error' => false,
                     'curl_error' => false,
                     'http_error' => true,
                     'http_error_code' => 401,
-                    'http_error_message' => 'Unauthorized'
-                )
+                    'http_error_message' => 'Unauthorized',
+                ]
             );
         $this->expectException(HttpException::class);
         $this->service->getData('48.8568', '2.3508');

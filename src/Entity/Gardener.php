@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Gardener implements UserInterface, \Serializable
 {
     use EntityUserTrait;
-    
+
     /**
      * @ORM\OneToMany(
      *      targetEntity="App\Entity\Token",
@@ -51,7 +51,7 @@ class Gardener implements UserInterface, \Serializable
      * )
      */
     private $recipes;
-    
+
     /**
      * @return Gardener
      */
@@ -63,7 +63,8 @@ class Gardener implements UserInterface, \Serializable
     }
 
     /**
-     * @param Token $pot
+     * @param Token $token
+     *
      * @return Gardener
      */
     public function addToken(Token $token): self
@@ -72,11 +73,13 @@ class Gardener implements UserInterface, \Serializable
             $this->tokens[] = $token;
             $token->setGardener($this);
         }
+
         return $this;
     }
 
     /**
-     * @param Token $pot
+     * @param Token $token
+     *
      * @return Gardener
      */
     public function removeToken(Token $token): self
@@ -87,6 +90,7 @@ class Gardener implements UserInterface, \Serializable
                 $token->setGardener(null);
             }
         }
+
         return $this;
     }
 
@@ -100,6 +104,7 @@ class Gardener implements UserInterface, \Serializable
 
     /**
      * @param Pot $pot
+     *
      * @return Gardener
      */
     public function addPot(Pot $pot): self
@@ -108,11 +113,13 @@ class Gardener implements UserInterface, \Serializable
             $this->pots[] = $pot;
             $pot->setGardener($this);
         }
+
         return $this;
     }
 
     /**
      * @param Pot $pot
+     *
      * @return Gardener
      */
     public function removePot(Pot $pot): self
@@ -123,6 +130,7 @@ class Gardener implements UserInterface, \Serializable
                 $pot->setGardener(null);
             }
         }
+
         return $this;
     }
 
@@ -136,6 +144,7 @@ class Gardener implements UserInterface, \Serializable
 
     /**
      * @param Recipe $recipe
+     *
      * @return Gardener
      */
     public function addRecipe(Recipe $recipe): self
@@ -144,11 +153,13 @@ class Gardener implements UserInterface, \Serializable
             $this->recipes[] = $recipe;
             $recipe->setGardener($this);
         }
+
         return $this;
     }
 
     /**
      * @param Recipe $recipe
+     *
      * @return Gardener
      */
     public function removeRecipe(Recipe $recipe): self
@@ -159,6 +170,7 @@ class Gardener implements UserInterface, \Serializable
                 $recipe->setGardener(null);
             }
         }
+
         return $this;
     }
 

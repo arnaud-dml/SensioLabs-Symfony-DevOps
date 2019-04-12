@@ -8,6 +8,7 @@ trait PropertyExpiredAtTrait
 {
     /**
      * @ORM\Column(type="integer", nullable=true)
+     *
      * @var \DateTimeInterface|null
      */
     protected $expiredAt;
@@ -21,12 +22,14 @@ trait PropertyExpiredAtTrait
     }
 
     /**
-     * @param \DateTimeInterface|null
+     * @param \DateTimeInterface|null $expiredAt
+     *
      * @return self
      */
     public function setExpiredAt(\DateTimeInterface $expiredAt = null): self
     {
-        $this->expiredAt = $expiredAt === null ? 0 : $expiredAt->getTimestamp();
+        $this->expiredAt = null === $expiredAt ? 0 : $expiredAt->getTimestamp();
+
         return $this;
     }
 
@@ -35,6 +38,6 @@ trait PropertyExpiredAtTrait
      */
     public function isExpired(): bool
     {
-        return ($this->expiredAt === 0 || $this->expiredAt < time());
+        return 0 === $this->expiredAt || $this->expiredAt < \time();
     }
 }

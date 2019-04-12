@@ -22,7 +22,7 @@ class SecurityControllerPantherTest extends PantherTestCase
 
         $form = $crawler->selectButton('submit')->form([
             '_username' => 'johndoe',
-            '_password' => 'johndoe'
+            '_password' => 'johndoe',
         ]);
         $crawler = $client->submit($form);
         // ?? -> https://symfony.com/doc/current/testing/http_authentication.html

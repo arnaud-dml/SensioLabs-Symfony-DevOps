@@ -30,7 +30,7 @@ class TokenManager
     protected $tokenGenerator;
 
     /**
-     * @param ObjectManager $entityManager
+     * @param ObjectManager           $entityManager
      * @param TokenGeneratorInterface $tokenGenerator
      */
     public function __construct(ObjectManager $entityManager, TokenGeneratorInterface $tokenGenerator)
@@ -38,10 +38,12 @@ class TokenManager
         $this->entityManager = $entityManager;
         $this->tokenGenerator = $tokenGenerator;
     }
-    
+
     /**
      * @param array $data
+     *
      * @throws MissingOptionsException
+     *
      * @return Token
      */
     public function createFromArray(array $data): Token
@@ -60,11 +62,13 @@ class TokenManager
             $token->setExpiredAt(new \Datetime($data['expired_at']));
         }
         $this->save($token);
+
         return $token;
     }
 
     /**
      * @param Gardener $gardener
+     *
      * @return Token
      */
     public function createRegisterToken(Gardener $gardener): Token
@@ -73,11 +77,13 @@ class TokenManager
         $data['gardener'] = $gardener;
         $data['type'] = self::TOKEN_TYPE_REGISTER;
         $data['expired_at'] = self::TOKEN_DURATION_REGISTER;
+
         return $this->createFromArray($data);
     }
 
     /**
      * @param Gardener $gardener
+     *
      * @return Token
      */
     public function createLostPasswordToken(Gardener $gardener): Token
@@ -86,12 +92,15 @@ class TokenManager
         $data['gardener'] = $gardener;
         $data['type'] = self::TOKEN_TYPE_LOST_PASSWORD;
         $data['expired_at'] = self::TOKEN_DURATION_LOST_PASSWORD;
+
         return $this->createFromArray($data);
     }
-    
+
     /**
      * @param Token $token
+     *
      * @throws ORMException
+     *
      * @return bool
      */
     public function save(Token $token): ?bool
@@ -100,15 +109,19 @@ class TokenManager
             $this->entityManager->persist($token);
         } catch (ORMException $e) {
             $this->logError($e->getMessage());
+
             return false;
         }
         $this->entityManager->flush();
+
         return true;
     }
-    
+
     /**
      * @param Token $token
+     *
      * @throws ORMException
+     *
      * @return bool
      */
     public function delete(Token $token): ?bool
@@ -117,9 +130,11 @@ class TokenManager
             $this->entityManager->remove($token);
         } catch (ORMException $e) {
             $this->logError($e->getMessage());
+
             return false;
         }
         $this->entityManager->flush();
+
         return true;
     }
 }

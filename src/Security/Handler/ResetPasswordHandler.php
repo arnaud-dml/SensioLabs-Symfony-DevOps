@@ -7,9 +7,8 @@ use App\Entity\Token;
 use App\Gardener\GardenerManager;
 use App\Manager\TokenManager;
 use App\Repository\TokenRepository;
-
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class ResetPasswordHandler
@@ -20,20 +19,20 @@ class ResetPasswordHandler
      * @var GardenerManager
      */
     private $gardenerManager;
-    
+
     /**
      * @var TokenManager
      */
     private $tokenManager;
-    
+
     /**
      * @var TokenRepository
      */
     private $tokenRepository;
-    
+
     /**
      * @param GardenerManager $gardenerManager
-     * @param TokenManager $tokenManager
+     * @param TokenManager    $tokenManager
      * @param TokenRepository $tokenRepository
      */
     public function __construct(
@@ -45,23 +44,28 @@ class ResetPasswordHandler
         $this->tokenManager = $tokenManager;
         $this->tokenRepository = $tokenRepository;
     }
-    
+
     /**
-     * @param String $token
-     * @return boolean
+     * @param string        $token
+     * @param FormInterface $form
+     * @param Request       $request
+     *
+     * @return bool
      */
     public function handle(FormInterface $form, Request $request, string $token)
     {
         $token = $this->tokenRepository->findOneBy([
             'token' => $token,
-            'type' => TokenManager::TOKEN_TYPE_LOST_PASSWORD
+            'type' => TokenManager::TOKEN_TYPE_LOST_PASSWORD,
         ]);
-        if ($token === null) {
-            $form->addError(new FormError("Unknown account"));
+        if (null === $token) {
+            $form->addError(new FormError('Unknown account'));
+
             return false;
         }
         if ($token->isExpired()) {
-            $form->addError(new FormError("This link has expired"));
+            $form->addError(new FormError('This link has expired'));
+
             return false;
         }
         $form->handleRequest($request);
@@ -79,10 +83,13 @@ class ResetPasswordHandler
             } catch (Exception $e) {
                 $this->logError($e->getMessage());
                 $form->addError(new FormError('Sorry, we encountered an error'));
+
                 return false;
             }
+
             return true;
         }
+
         return false;
     }
 }

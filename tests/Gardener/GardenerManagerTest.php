@@ -18,7 +18,7 @@ class GardenerManagerTest extends TestCase
     private $entityManager;
 
     /**
-     * @var  MockObject|UserPasswordEncoderInterface
+     * @var MockObject|UserPasswordEncoderInterface
      */
     protected $passwordEncoder;
 
@@ -43,7 +43,7 @@ class GardenerManagerTest extends TestCase
         $this->entityManager
             ->expects(self::once())
             ->method('flush');
-        
+
         $this->passwordEncoder
             ->expects(self::once())
             ->method('encodePassword')

@@ -52,6 +52,7 @@ docker_start:
 docker_stop: ## stop docker
 docker_stop:
 	docker-compose down
+	docker system prune -f
 .PHONY: docker_stop
 
 ## 
@@ -159,21 +160,19 @@ yaml: install
 	$(SYMFONY) lint:yaml config
 .PHONY: yaml
 
-phpcs: ## run PHP Code Sniffer (PSR1, PSR2, PSR12)
+phpcs: ## run PHP Code Sniffer (PSR1, PSR2)
 phpcs: install
 	mkdir -p $(LOG)/phpcs/
 	$(VENDOR)/phpcs --standard=PSR1  src --ignore=./src/Kernel.php --report-full=$(LOG)/phpcs/PSR1.txt
 	$(VENDOR)/phpcs --standard=PSR1  tests --report-full=$(LOG)/phpcs/PSR1.txt
 	$(VENDOR)/phpcs --standard=PSR2  src --ignore=./src/Kernel.php --report-full=$(LOG)/phpcs/PSR2.txt
 	$(VENDOR)/phpcs --standard=PSR2  tests --report-full=$(LOG)/phpcs/PSR2.txt
-	$(VENDOR)/phpcs --standard=PSR12 src --ignore=./src/Kernel.php --report-full=$(LOG)/phpcs/PSR12.txt
-	$(VENDOR)/phpcs --standard=PSR12 tests --report-full=$(LOG)/phpcs/PSR12.txt
 .PHONY: phpcs
 
-phpcsfixer: ## run PHP Code Sniffer Fixer
-phpcsfixer: install phpcs
+fixer: ## run PHP Code Sniffer Fixer
+fixer: install
 	$(VENDOR)/php-cs-fixer fix --using-cache=no --verbose --diff
-.PHONY: phpcsfixer
+.PHONY: fixer
 
 phpmd: ## run PHP Mess Detector
 phpmd: install
@@ -223,12 +222,10 @@ travis: install
 	$(SYMFONY) lint:yaml config
 	$(VENDOR)/phpcs --standard=PSR1  src --ignore=./src/Kernel.php
 	$(VENDOR)/phpcs --standard=PSR2  src --ignore=./src/Kernel.php
-	$(VENDOR)/phpcs --standard=PSR12 src --ignore=./src/Kernel.php
 	$(VENDOR)/phpmd src text ./phpmd.xml.dist
 	$(VENDOR)/phpcpd src
 	$(VENDOR)/phpcs --standard=PSR1  tests
 	$(VENDOR)/phpcs --standard=PSR2  tests
-	$(VENDOR)/phpcs --standard=PSR12 tests
 	$(VENDOR)/phpmd tests text ./phpmd.xml.dist
 	$(VENDOR)/phpcpd tests
 	$(PHPUNIT) --coverage-clover=coverage.xml --exclude-group panther

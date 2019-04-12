@@ -6,33 +6,33 @@ use App\Common\Helper\LoggerTrait;
 use App\Helper\MailerHelper;
 use App\Manager\TokenManager;
 use App\Repository\GardenerRepository;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class LostPasswordHandler
 {
     use LoggerTrait;
-    
+
     /**
      * @var GardenerRepository
      */
     private $gardenerRepository;
-    
+
     /**
      * @var TokenManager
      */
     private $tokenManager;
-    
+
     /**
      * @var MailerHelper
      */
     private $mailerHelper;
-    
+
     /**
      * @param GardenerRepository $gardenerRepository
-     * @param TokenManager $tokenManager
-     * @param MailerHelper $mailerHelper
+     * @param TokenManager       $tokenManager
+     * @param MailerHelper       $mailerHelper
      */
     public function __construct(
         GardenerRepository $gardenerRepository,
@@ -43,19 +43,21 @@ class LostPasswordHandler
         $this->tokenManager = $tokenManager;
         $this->mailerHelper = $mailerHelper;
     }
-    
+
     /**
      * @param FormInterface $form
-     * @param Request $request
-     * @return boolean
+     * @param Request       $request
+     *
+     * @return bool
      */
     public function handle(FormInterface $form, Request $request)
     {
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $gardener = $this->gardenerRepository->findOneByUsernameOrEmail($form->getData()['login']);
-            if ($gardener === null) {
+            if (null === $gardener) {
                 $form->addError(new FormError('Unknown account'));
+
                 return false;
             }
             try {
@@ -64,10 +66,13 @@ class LostPasswordHandler
             } catch (Exception $e) {
                 $this->logError($e->getMessage());
                 $form->addError(new FormError('Sorry, we encountered an error'));
+
                 return false;
             }
+
             return true;
         }
+
         return false;
     }
 }

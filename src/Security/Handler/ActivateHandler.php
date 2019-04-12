@@ -15,20 +15,20 @@ class ActivateHandler
      * @var GardenerManager
      */
     private $gardenerManager;
-    
+
     /**
      * @var TokenManager
      */
     private $tokenManager;
-    
+
     /**
      * @var TokenRepository
      */
     private $tokenRepository;
-    
+
     /**
      * @param GardenerManager $gardenerManager
-     * @param TokenManager $tokenManager
+     * @param TokenManager    $tokenManager
      * @param TokenRepository $tokenRepository
      */
     public function __construct(
@@ -40,18 +40,19 @@ class ActivateHandler
         $this->tokenManager = $tokenManager;
         $this->tokenRepository = $tokenRepository;
     }
-    
+
     /**
-     * @param String $token
-     * @return boolean
+     * @param string $token
+     *
+     * @return bool
      */
     public function handle(string $token)
     {
         $token = $this->tokenRepository->findOneBy([
             'token' => $token,
-            'type' => TokenManager::TOKEN_TYPE_REGISTER
+            'type' => TokenManager::TOKEN_TYPE_REGISTER,
         ]);
-        if ($token === null) {
+        if (null === $token) {
             return false;
         }
         try {
@@ -59,8 +60,10 @@ class ActivateHandler
             $this->tokenManager->delete($token);
         } catch (Exception $e) {
             $this->logError($e->getMessage());
+
             return false;
         }
+
         return true;
     }
 }

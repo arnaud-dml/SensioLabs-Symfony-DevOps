@@ -8,6 +8,7 @@ trait PropertyCreatedAtTrait
 {
     /**
      * @ORM\Column(type="datetime")
+     *
      * @var \DateTimeInterface
      */
     private $createdAt;
@@ -21,12 +22,14 @@ trait PropertyCreatedAtTrait
     }
 
     /**
-     * @param \DateTimeInterface
+     * @param \DateTimeInterface $createdAt
+     *
      * @return self
      */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 

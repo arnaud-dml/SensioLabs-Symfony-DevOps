@@ -2,11 +2,10 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\Pot;
 use App\Entity\Gardener;
 use App\Entity\Plant;
+use App\Entity\Pot;
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class PotTest extends TestCase

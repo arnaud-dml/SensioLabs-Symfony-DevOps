@@ -36,7 +36,7 @@ class WeatherCommandTest extends TestCase
         $command = $application->find('weather:create');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'command' => 'weather:create'
+            'command' => 'weather:create',
         ]);
         $output = $commandTester->getDisplay();
         $this->assertContains('Weather has been recovered!', $output);

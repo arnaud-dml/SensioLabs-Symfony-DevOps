@@ -8,6 +8,7 @@ trait PropertyUpdatedAtTrait
 {
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTimeInterface|null
      */
     private $updatedAt;
@@ -21,12 +22,14 @@ trait PropertyUpdatedAtTrait
     }
 
     /**
-     * @param \DateTimeInterface
+     * @param \DateTimeInterface $updatedAt
+     *
      * @return self
      */
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 

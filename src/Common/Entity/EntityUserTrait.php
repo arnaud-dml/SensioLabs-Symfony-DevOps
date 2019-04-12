@@ -19,11 +19,12 @@ trait EntityUserTrait
     use PropertyEnabledTrait;
     use PropertyLockedTrait;
     use PropertyNameTrait;
-    
+
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotNull
      * @Assert\Length(min=5)
+     *
      * @var string
      */
     private $username;
@@ -32,24 +33,28 @@ trait EntityUserTrait
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotNull
      * @Assert\Email
+     *
      * @var string
      */
     private $email;
 
     /**
      * @Assert\Length(min=5, max=20)
+     *
      * @var string
      */
     private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=64)
+     *
      * @var string
      */
     private $password;
 
     /**
      * @ORM\Column(type="array")
+     *
      * @var array
      */
     private $roles = [];
@@ -64,11 +69,13 @@ trait EntityUserTrait
 
     /**
      * @param string $username
+     *
      * @return self
      */
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -82,11 +89,13 @@ trait EntityUserTrait
 
     /**
      * @param string $email
+     *
      * @return self
      */
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -100,11 +109,13 @@ trait EntityUserTrait
 
     /**
      * @param string $plainPassword
+     *
      * @return self
      */
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
         return $this;
     }
 
@@ -118,11 +129,13 @@ trait EntityUserTrait
 
     /**
      * @param string $password
+     *
      * @return self
      */
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -134,42 +147,49 @@ trait EntityUserTrait
         if (empty($this->roles)) {
             $this->addRole('ROLE_USER');
         }
+
         return $this->roles;
     }
 
     /**
      * @param array $roles
+     *
      * @return self
      */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
         return $this;
     }
 
     /**
      * @param string $role
+     *
      * @return self
      */
     public function addRole(string $role): self
     {
-        if (!in_array($role, $this->roles)) {
+        if (!\in_array($role, $this->roles, true)) {
             $this->roles[] = $role;
         }
+
         return $this;
     }
 
     /**
      * @param string $role
+     *
      * @return self
      */
     public function removeRole(string $role): self
     {
         $roles = $this->getRoles();
-        if (($key = array_search($role, $roles)) !== false) {
+        if (false !== ($key = \array_search($role, $roles, true))) {
             unset($roles[$key]);
         }
-        $this->setRoles(array_values($roles));
+        $this->setRoles(\array_values($roles));
+
         return $this;
     }
 
@@ -187,32 +207,37 @@ trait EntityUserTrait
 
     /**
      * @see \Serializable::serialize()
+     *
      * @return string
      */
     public function serialize(): string
     {
-        return serialize([
+        return \serialize([
             $this->id,
             $this->username,
             $this->email,
             $this->password,
-            $this->isEnabled
+            $this->isEnabled,
         ]);
     }
 
     /**
      * @see \Serializable::unserialize()
+     *
+     * @param mixed $serialized
+     *
      * @return self
      */
     public function unserialize($serialized): self
     {
-        list (
+        list(
             $this->id,
             $this->username,
             $this->email,
             $this->password,
             $this->isEnabled
-        ) = unserialize($serialized);
+        ) = \unserialize($serialized);
+
         return $this;
     }
 }

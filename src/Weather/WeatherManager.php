@@ -3,10 +3,7 @@
 namespace App\Weather;
 
 use App\Entity\Weather;
-use App\Weather\WeatherService;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 class WeatherManager
 {
@@ -21,7 +18,8 @@ class WeatherManager
     protected $weatherService;
 
     /**
-     * @param ObjectManager $entityManager
+     * @param ObjectManager  $entityManager
+     * @param WeatherService $weatherService
      */
     public function __construct(ObjectManager $entityManager, WeatherService $weatherService)
     {

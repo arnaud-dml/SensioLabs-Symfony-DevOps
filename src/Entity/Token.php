@@ -58,6 +58,7 @@ class Token
     public function setType(string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -69,6 +70,7 @@ class Token
     public function setGardener(?Gardener $gardener): self
     {
         $this->gardener = $gardener;
+
         return $this;
     }
 }

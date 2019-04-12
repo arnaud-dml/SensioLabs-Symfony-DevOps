@@ -10,6 +10,7 @@ trait PropertyNameTrait
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      * @Assert\Length(min=3, max=30)
+     *
      * @var string
      */
     private $firstname;
@@ -17,6 +18,7 @@ trait PropertyNameTrait
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      * @Assert\Length(min=3, max=30)
+     *
      * @var string
      */
     private $lastname;
@@ -31,11 +33,13 @@ trait PropertyNameTrait
 
     /**
      * @param string $firstname
+     *
      * @return self
      */
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
+
         return $this;
     }
 
@@ -49,11 +53,13 @@ trait PropertyNameTrait
 
     /**
      * @param string $lastname
+     *
      * @return self
      */
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
         return $this;
     }
 
@@ -62,7 +68,7 @@ trait PropertyNameTrait
      */
     public function getName(): ?string
     {
-        return $this->getFirstname() . ' ' . $this->getLastname();
+        return $this->getFirstname().' '.$this->getLastname();
     }
 
     /**

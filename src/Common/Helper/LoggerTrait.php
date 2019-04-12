@@ -13,6 +13,8 @@ trait LoggerTrait
 
     /**
      * @required
+     *
+     * @param LoggerInterface $logger
      */
     public function setLogger(LoggerInterface $logger)
     {
@@ -24,10 +26,8 @@ trait LoggerTrait
      *
      * @param string $message
      * @param array  $context
-     *
-     * @return void
      */
-    public function logEmergency($message, array $context = array()): void
+    public function logEmergency($message, array $context = []): void
     {
         if ($this->logger) {
             $this->logger->emergency($message, $context);
@@ -42,10 +42,8 @@ trait LoggerTrait
      *
      * @param string $message
      * @param array  $context
-     *
-     * @return void
      */
-    public function logAlert($message, array $context = array()): void
+    public function logAlert($message, array $context = []): void
     {
         if ($this->logger) {
             $this->logger->alert($message, $context);
@@ -59,10 +57,8 @@ trait LoggerTrait
      *
      * @param string $message
      * @param array  $context
-     *
-     * @return void
      */
-    public function logCritical($message, array $context = array()): void
+    public function logCritical($message, array $context = []): void
     {
         if ($this->logger) {
             $this->logger->critical($message, $context);
@@ -75,10 +71,8 @@ trait LoggerTrait
      *
      * @param string $message
      * @param array  $context
-     *
-     * @return void
      */
-    public function logError($message, array $context = array()): void
+    public function logError($message, array $context = []): void
     {
         if ($this->logger) {
             $this->logger->error($message, $context);
@@ -93,10 +87,8 @@ trait LoggerTrait
      *
      * @param string $message
      * @param array  $context
-     *
-     * @return void
      */
-    public function logWarning($message, array $context = array()): void
+    public function logWarning($message, array $context = []): void
     {
         if ($this->logger) {
             $this->logger->warning($message, $context);
@@ -108,10 +100,8 @@ trait LoggerTrait
      *
      * @param string $message
      * @param array  $context
-     *
-     * @return void
      */
-    public function logNotice($message, array $context = array()): void
+    public function logNotice($message, array $context = []): void
     {
         if ($this->logger) {
             $this->logger->notice($message, $context);
@@ -125,10 +115,8 @@ trait LoggerTrait
      *
      * @param string $message
      * @param array  $context
-     *
-     * @return void
      */
-    public function logInfo($message, array $context = array()): void
+    public function logInfo($message, array $context = []): void
     {
         if ($this->logger) {
             $this->logger->info($message, $context);
@@ -140,10 +128,8 @@ trait LoggerTrait
      *
      * @param string $message
      * @param array  $context
-     *
-     * @return void
      */
-    public function logDebug($message, array $context = array()): void
+    public function logDebug($message, array $context = []): void
     {
         if ($this->logger) {
             $this->logger->debug($message, $context);

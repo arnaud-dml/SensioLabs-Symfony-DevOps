@@ -2,11 +2,11 @@
 
 namespace App\Tests\Fixtures;
 
+use App\DataFixtures\GardenerFixtures;
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
-use App\DataFixtures\GardenerFixtures;
 
 class GardenerFixturesTest extends TestCase
 {

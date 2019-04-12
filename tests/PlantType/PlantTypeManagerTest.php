@@ -2,12 +2,12 @@
 
 namespace App\Tests\PlantType;
 
+use App\Entity\PlantType;
+use App\PlantType\PlantTypeManager;
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use App\PlantType\PlantTypeManager;
-use App\Entity\PlantType;
 
 class PlantTypeManagerTest extends TestCase
 {
@@ -38,7 +38,7 @@ class PlantTypeManagerTest extends TestCase
             ->method('flush');
 
         $plantType = $this->manager->createFromArray([
-            'name' => 'Tomate'
+            'name' => 'Tomate',
         ]);
 
         self::assertInstanceOf(PlantType::class, $plantType);

@@ -8,7 +8,6 @@ use App\Weather\WeatherService;
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 class WeatherManagerTest extends TestCase
 {
@@ -51,7 +50,7 @@ class WeatherManagerTest extends TestCase
                 'location' => '48.8568,2.3508',
                 'temperature' => 23.6,
                 'humidity' => 14.8,
-                'date' => new \DateTime()
+                'date' => new \DateTime(),
             ]);
 
         $weather = $this->manager->create();

@@ -10,6 +10,7 @@ trait PropertyIdTrait
      * @ORM\Id()
      * @ORM\Column(type="integer", options={"unigned":true})
      * @ORM\GeneratedValue()
+     *
      * @var int|null
      */
     private $id;

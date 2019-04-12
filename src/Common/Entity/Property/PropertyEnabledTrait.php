@@ -8,6 +8,7 @@ trait PropertyEnabledTrait
 {
     /**
      * @ORM\Column(type="enabled", type="boolean", nullable=false)
+     *
      * @var bool
      */
     private $isEnabled = true;
@@ -22,11 +23,13 @@ trait PropertyEnabledTrait
 
     /**
      * @param bool $enabled
+     *
      * @return self
      */
     public function setEnabled(bool $enabled): self
     {
         $this->isEnabled = $enabled;
+
         return $this;
     }
 

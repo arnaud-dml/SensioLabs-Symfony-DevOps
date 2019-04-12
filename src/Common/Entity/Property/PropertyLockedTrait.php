@@ -8,16 +8,18 @@ trait PropertyLockedTrait
 {
     /**
      * @ORM\Column(name="failures", type="integer", nullable=true)
+     *
      * @var int|null
      */
     protected $failures = 0;
-    
+
     /**
      * @ORM\Column(name="locked_until", type="integer", nullable=true)
+     *
      * @var int|null
      */
     protected $lockedUntil;
-    
+
     /**
      * @return int|null
      */
@@ -25,13 +27,14 @@ trait PropertyLockedTrait
     {
         return $this->failures;
     }
-    
+
     /**
      * @return self
      */
     public function incFailures(): self
     {
-        $this->failures++;
+        ++$this->failures;
+
         return $this;
     }
 
@@ -40,20 +43,22 @@ trait PropertyLockedTrait
      */
     public function isLocked(): bool
     {
-        return $this->lockedUntil !== null && $this->lockedUntil > time();
+        return null !== $this->lockedUntil && $this->lockedUntil > \time();
     }
-    
+
     /**
      * @param \DateTimeInterface $time
+     *
      * @return self
      */
     public function lock(\DateTimeInterface $time): self
     {
         $this->failures = null;
         $this->lockedUntil = $time->getTimestamp();
+
         return $this;
     }
-    
+
     /**
      * @return self
      */
@@ -61,6 +66,7 @@ trait PropertyLockedTrait
     {
         $this->failures = null;
         $this->lockedUntil = null;
+
         return $this;
     }
 }

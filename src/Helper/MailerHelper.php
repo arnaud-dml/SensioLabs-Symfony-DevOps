@@ -4,7 +4,6 @@ namespace App\Helper;
 
 use App\Common\Helper\LoggerTrait;
 use App\Entity\Token;
-use App\Manager\TokenManager;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MailerHelper
@@ -28,6 +27,10 @@ class MailerHelper
 
     /**
      * @required
+     *
+     * @param \Swift_Mailer         $mailer
+     * @param \Twig_Environment     $templating
+     * @param UrlGeneratorInterface $router
      */
     public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating, UrlGeneratorInterface $router)
     {
@@ -37,59 +40,56 @@ class MailerHelper
     }
 
     /**
-     * @param Token  $token
-     * @return void
+     * @param Token $token
      */
     public function sendRegisterMail(Token $token): void
     {
         $to = $token->getGardener()->getName() ? [
-            $token->getGardener()->getEmail() => $token->getGardener()->getName()
+            $token->getGardener()->getEmail() => $token->getGardener()->getName(),
         ] : $token->getGardener()->getEmail();
         $from = [
-            'contact@oai.com' => 'Open Agriculture Initiative'
+            'contact@oai.com' => 'Open Agriculture Initiative',
         ];
         $subject = 'Activate your account';
         $body = $this->templating->render('security/mail/register.html.twig', [
             'name' => $token->getGardener()->getName(),
             'link' => $this->router->generate('security_account_activation', [
-                'token' => $token->getToken()
-            ], UrlGeneratorInterface::ABSOLUTE_URL)
+                'token' => $token->getToken(),
+            ], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
         $this->sendMail($to, $from, $subject, $body);
-        $this->logInfo('Send register mail at ' . $token->getGardener()->getEmail());
+        $this->logInfo('Send register mail at '.$token->getGardener()->getEmail());
     }
 
     /**
-     * @param Token  $token
-     * @return void
+     * @param Token $token
      */
     public function sendLostPasswordMail(Token $token): void
     {
         $to = $token->getGardener()->getName() ? [
-            $token->getGardener()->getEmail() => $token->getGardener()->getName()
+            $token->getGardener()->getEmail() => $token->getGardener()->getName(),
         ] : $token->getGardener()->getEmail();
         $from = [
-            'contact@oai.com' => 'Open Agriculture Initiative'
+            'contact@oai.com' => 'Open Agriculture Initiative',
         ];
         $subject = 'Reset your password';
         $body = $this->templating->render('security/mail/lost_password.html.twig', [
             'name' => $token->getGardener()->getName(),
             'link' => $this->router->generate('security_reset_password', [
-                'token' => $token->getToken()
-            ], UrlGeneratorInterface::ABSOLUTE_URL)
+                'token' => $token->getToken(),
+            ], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
         $this->sendMail($to, $from, $subject, $body);
-        $this->logInfo('Send lost password mail at ' . $token->getGardener()->getEmail());
+        $this->logInfo('Send lost password mail at '.$token->getGardener()->getEmail());
     }
 
     /**
      * @param string|array $to
      * @param string|array $from
-     * @param string $subject
-     * @param string $body
-     * @param string $format
-     * @param string $charset
-     * @return void
+     * @param string       $subject
+     * @param string       $body
+     * @param string       $format
+     * @param string       $charset
      */
     public function sendMail(
         $to,

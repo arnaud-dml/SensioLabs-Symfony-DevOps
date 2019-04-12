@@ -21,6 +21,7 @@ class GardenerRepository extends ServiceEntityRepository
 
     /**
      * @param string $login
+     *
      * @return Gardener|null
      */
     public function findOneByUsernameOrEmail(string $login): ?Gardener
