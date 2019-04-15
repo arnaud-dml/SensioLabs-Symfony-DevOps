@@ -66,7 +66,7 @@ trait PropertyNameTrait
     /**
      * @return string|null
      */
-    public function getName(): ?string
+    public function getDisplayName(): ?string
     {
         return $this->getFirstname().' '.$this->getLastname();
     }
@@ -76,6 +76,6 @@ trait PropertyNameTrait
      */
     public function __toString(): ?string
     {
-        return $this->getName();
+        return $this->getDisplayName();
     }
 }

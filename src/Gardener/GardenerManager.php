@@ -5,6 +5,7 @@ namespace App\Gardener;
 use App\Common\Helper\LoggerTrait;
 use App\Entity\Gardener;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\ORMException;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 

@@ -1,0 +1,9 @@
+services:
+    App\Security\Handler\ActivateHandler:
+        public: true
+    App\Security\Handler\LostPasswordHandler:
+        public: true
+    App\Security\Handler\RegisterHandler:
+        public: true
+    App\Security\Handler\ResetPasswordHandler:
+        public: true

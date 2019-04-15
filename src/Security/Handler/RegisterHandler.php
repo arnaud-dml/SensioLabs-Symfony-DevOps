@@ -2,6 +2,7 @@
 
 namespace App\Security\Handler;
 
+use App\Common\Helper\LoggerTrait;
 use App\Gardener\GardenerManager;
 use App\Helper\MailerHelper;
 use App\Manager\TokenManager;
@@ -11,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RegisterHandler
 {
+    use LoggerTrait;
+
     /**
      * @var GardenerManager
      */
@@ -57,7 +60,7 @@ class RegisterHandler
                 $gardener = $this->gardenerManager->register($form->getData());
                 $token = $this->tokenManager->createRegisterToken($gardener);
                 $this->mailerHelper->sendRegisterMail($token);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->logError($e->getMessage());
                 $form->addError(new FormError('Sorry, we encountered an error'));
 

@@ -24,6 +24,15 @@ class GardenerRepositoryTest extends KernelTestCase
         self::assertInternalType('array', $gardener);
     }
 
+    public function testFindOneByUsernameOrEmail()
+    {
+        $gardener = $this->entityManager->getRepository(Gardener::class)->findOneByUsernameOrEmail('wrong');
+        self::assertNull($gardener);
+
+        $gardener = $this->entityManager->getRepository(Gardener::class)->findOneByUsernameOrEmail('johndoe');
+        self::assertInstanceOf(Gardener::class, $gardener);
+    }
+
     protected function tearDown()
     {
         parent::tearDown();

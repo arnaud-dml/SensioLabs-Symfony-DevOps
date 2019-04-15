@@ -63,7 +63,7 @@ class LostPasswordHandler
             try {
                 $token = $this->tokenManager->createLostPasswordToken($gardener);
                 $this->mailerHelper->sendLostPasswordMail($token);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->logError($e->getMessage());
                 $form->addError(new FormError('Sorry, we encountered an error'));
 

@@ -58,7 +58,7 @@ class TokenManager
         $token->setToken($this->tokenGenerator->generateToken());
         $token->setGardener($data['gardener']);
         $token->setType($data['type']);
-        if ($data['expired_at']) {
+        if (isset($data['expired_at'])) {
             $token->setExpiredAt(new \Datetime($data['expired_at']));
         }
         $this->save($token);

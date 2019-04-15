@@ -43,6 +43,6 @@ trait PropertyDeletedAtTrait
 
     public function recover(): void
     {
-        $this->deleteAt = null;
+        $this->deletedAt = null;
     }
 }

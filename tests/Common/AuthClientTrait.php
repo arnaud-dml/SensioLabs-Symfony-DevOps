@@ -11,7 +11,7 @@ trait AuthClientTrait
     /**
      * @param Client $client
      */
-    public function authClient(Client $client)
+    public function authClient(Client $client): void
     {
         $session = $client->getContainer()->get('session');
         $firewallName = 'main';

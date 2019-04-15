@@ -5,6 +5,7 @@ namespace App\Tests\Entity;
 use App\Entity\Gardener;
 use App\Entity\Pot;
 use App\Entity\Recipe;
+use App\Entity\Token;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 
@@ -22,74 +23,28 @@ class GardenerTest extends TestCase
 
     public function testConstruct()
     {
+        self::assertInstanceOf(ArrayCollection::class, $this->gardener->getTokens());
         self::assertInstanceOf(ArrayCollection::class, $this->gardener->getPots());
         self::assertInstanceOf(ArrayCollection::class, $this->gardener->getRecipes());
+        self::assertCount(0, $this->gardener->getTokens());
         self::assertCount(0, $this->gardener->getPots());
         self::assertCount(0, $this->gardener->getRecipes());
     }
 
-    public function testHasId()
+    public function testHasTokens()
     {
-        self::assertNull($this->gardener->getId());
-    }
+        $token = $this->createMock(Token::class);
 
-    public function testHasUsername()
-    {
-        $username = 'John Doe';
-        $this->gardener->setUsername($username);
-        self::assertEquals($username, $this->gardener->getUsername());
-    }
+        $this->gardener->addToken($token);
+        self::assertCount(1, $this->gardener->getTokens());
 
-    public function testHasEmail()
-    {
-        $email = 'john-doe@gmail.com';
-        $this->gardener->setEmail($email);
-        self::assertEquals($email, $this->gardener->getEmail());
-    }
+        $this->gardener->addToken($token);
+        self::assertCount(1, $this->gardener->getTokens());
 
-    public function testHasPlainPassword()
-    {
-        $plainPassword = 'Ghk2t73&L_Xa@Vf9';
-        $this->gardener->setPlainPassword($plainPassword);
-        self::assertEquals($plainPassword, $this->gardener->getPlainPassword());
-    }
+        $token->method('getGardener')->willReturn($this->gardener);
 
-    public function testHasPassword()
-    {
-        $password = 'Ghk2t73&L_Xa@Vf9';
-        $this->gardener->setPassword($password);
-        self::assertEquals($password, $this->gardener->getPassword());
-    }
-
-    public function testHasRoles()
-    {
-        $roles = ['ROLE_ADMIN'];
-        $this->gardener->setRoles($roles);
-        self::assertEquals($roles, $this->gardener->getRoles());
-    }
-
-    public function testHasAddRole()
-    {
-        $roleDefault = 'ROLE_USER';
-        $role = 'ROLE_ADMIN';
-        self::assertEquals([$roleDefault], $this->gardener->getRoles());
-        $this->gardener->addRole($role);
-        self::assertEquals([$roleDefault, $role], $this->gardener->getRoles());
-    }
-
-    public function testHasRemoveRole()
-    {
-        $roleDefault = 'ROLE_USER';
-        $role = 'ROLE_ADMIN';
-        $this->gardener->addRole($role);
-        $this->gardener->removeRole($role);
-        self::assertEquals([$roleDefault], $this->gardener->getRoles());
-    }
-
-    public function testHasSerialize()
-    {
-        $serialize = $this->gardener->serialize();
-        self::assertEquals($this->gardener, $this->gardener->unserialize($serialize));
+        $this->gardener->removeToken($token);
+        self::assertCount(0, $this->gardener->getTokens());
     }
 
     public function testHasPots()

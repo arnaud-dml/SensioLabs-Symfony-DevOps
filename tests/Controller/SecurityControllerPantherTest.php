@@ -20,11 +20,11 @@ class SecurityControllerPantherTest extends PantherTestCase
         self::assertCount(1, $crawler->filter('input[name=_csrf_token]'));
         self::assertCount(1, $crawler->filter('button[type=submit]'));
 
-        $form = $crawler->selectButton('submit')->form([
-            '_username' => 'johndoe',
-            '_password' => 'johndoe',
-        ]);
-        $crawler = $client->submit($form);
+        // $form = $crawler->selectButton('submit')->form([
+        //     '_username' => 'johndoe',
+        //     '_password' => 'johndoe',
+        // ]);
+        // $crawler = $client->submit($form);
         // ?? -> https://symfony.com/doc/current/testing/http_authentication.html
         //self::assertCount('MAIN NAVIGATION', $crawler->filter('.sidebar-menu .header')->html());
 

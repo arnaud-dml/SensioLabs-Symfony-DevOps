@@ -1,2 +1,2 @@
-logout:
-    path: /logout
+security_logout:
+    path: /signout

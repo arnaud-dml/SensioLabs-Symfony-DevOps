@@ -58,7 +58,7 @@ class ActivateHandler
         try {
             $this->gardenerManager->save($token->getGardener()->setEnabled(true));
             $this->tokenManager->delete($token);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->logError($e->getMessage());
 
             return false;

@@ -9,14 +9,14 @@ trait PropertyExpiredAtTrait
     /**
      * @ORM\Column(type="integer", nullable=true)
      *
-     * @var \DateTimeInterface|null
+     * @var int|null
      */
     protected $expiredAt;
 
     /**
-     * @return \DateTimeInterface|null
+     * @return int|null
      */
-    public function getExpiredAt(): ?\DateTimeInterface
+    public function getExpiredAt(): ?int
     {
         return $this->expiredAt;
     }

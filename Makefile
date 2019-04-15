@@ -13,10 +13,10 @@ CACHE 	= ./var/cache
 ## 
 
 composer.lock: composer.json
-	composer update --lock --no-scripts --no-progress --no-interaction
+	composer update --lock --no-scripts --no-plugins --no-progress --no-interaction
 
 vendor: composer.lock
-	composer install --no-scripts --no-progress --no-interaction
+	composer install --no-scripts --no-plugins --no-progress --no-interaction
 
 package-lock.json: package.json
 	npm update
@@ -160,19 +160,19 @@ yaml: install
 	$(SYMFONY) lint:yaml config
 .PHONY: yaml
 
+phpcsf: ## run PHP Code Sniffer Fixer
+phpcsf: install
+	$(VENDOR)/php-cs-fixer fix --using-cache=no --verbose --diff
+.PHONY: phpcsf
+
 phpcs: ## run PHP Code Sniffer (PSR1, PSR2)
-phpcs: install
+phpcs: install phpcsf
 	mkdir -p $(LOG)/phpcs/
 	$(VENDOR)/phpcs --standard=PSR1  src --ignore=./src/Kernel.php --report-full=$(LOG)/phpcs/PSR1.txt
 	$(VENDOR)/phpcs --standard=PSR1  tests --report-full=$(LOG)/phpcs/PSR1.txt
 	$(VENDOR)/phpcs --standard=PSR2  src --ignore=./src/Kernel.php --report-full=$(LOG)/phpcs/PSR2.txt
 	$(VENDOR)/phpcs --standard=PSR2  tests --report-full=$(LOG)/phpcs/PSR2.txt
 .PHONY: phpcs
-
-fixer: ## run PHP Code Sniffer Fixer
-fixer: install
-	$(VENDOR)/php-cs-fixer fix --using-cache=no --verbose --diff
-.PHONY: fixer
 
 phpmd: ## run PHP Mess Detector
 phpmd: install

@@ -42,13 +42,6 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/signout", name="logout")
-     */
-    public function logout()
-    {
-    }
-
-    /**
      * @Route("/signup", name="register")
      *
      * @param Request         $request

@@ -3,7 +3,6 @@
 namespace App\Security\Handler;
 
 use App\Common\Helper\LoggerTrait;
-use App\Entity\Token;
 use App\Gardener\GardenerManager;
 use App\Manager\TokenManager;
 use App\Repository\TokenRepository;
@@ -52,7 +51,7 @@ class ResetPasswordHandler
      *
      * @return bool
      */
-    public function handle(FormInterface $form, Request $request, string $token)
+    public function handle(FormInterface $form, Request $request, string $token): bool
     {
         $token = $this->tokenRepository->findOneBy([
             'token' => $token,
@@ -80,7 +79,7 @@ class ResetPasswordHandler
             try {
                 $this->gardenerManager->save($token->getGardener());
                 $this->tokenManager->delete($token);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->logError($e->getMessage());
                 $form->addError(new FormError('Sorry, we encountered an error'));
 

@@ -44,15 +44,15 @@ class MailerHelper
      */
     public function sendRegisterMail(Token $token): void
     {
-        $to = $token->getGardener()->getName() ? [
-            $token->getGardener()->getEmail() => $token->getGardener()->getName(),
+        $to = $token->getGardener()->getDisplayName() ? [
+            $token->getGardener()->getEmail() => $token->getGardener()->getDisplayName(),
         ] : $token->getGardener()->getEmail();
         $from = [
             'contact@oai.com' => 'Open Agriculture Initiative',
         ];
         $subject = 'Activate your account';
         $body = $this->templating->render('security/mail/register.html.twig', [
-            'name' => $token->getGardener()->getName(),
+            'name' => $token->getGardener()->getDisplayName(),
             'link' => $this->router->generate('security_account_activation', [
                 'token' => $token->getToken(),
             ], UrlGeneratorInterface::ABSOLUTE_URL),
@@ -66,15 +66,15 @@ class MailerHelper
      */
     public function sendLostPasswordMail(Token $token): void
     {
-        $to = $token->getGardener()->getName() ? [
-            $token->getGardener()->getEmail() => $token->getGardener()->getName(),
+        $to = $token->getGardener()->getDisplayName() ? [
+            $token->getGardener()->getEmail() => $token->getGardener()->getDisplayName(),
         ] : $token->getGardener()->getEmail();
         $from = [
             'contact@oai.com' => 'Open Agriculture Initiative',
         ];
         $subject = 'Reset your password';
         $body = $this->templating->render('security/mail/lost_password.html.twig', [
-            'name' => $token->getGardener()->getName(),
+            'name' => $token->getGardener()->getDisplayName(),
             'link' => $this->router->generate('security_reset_password', [
                 'token' => $token->getToken(),
             ], UrlGeneratorInterface::ABSOLUTE_URL),
